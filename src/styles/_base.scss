@@ -1,0 +1,24 @@
+@use 'variables' as *;
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $font-display;
+  background: $rivaas-night;
+  overflow-x: hidden;
+}
+
+section:not(.hero-bg) {
+  background: $rivaas-night;
+}
+
+section.section-glow {
+  background: linear-gradient(180deg, $rivaas-night 0%, #1A2220 50%, $rivaas-night 100%);
+}
