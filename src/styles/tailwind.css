@@ -1,0 +1,22 @@
+/* stylelint-disable at-rule-no-unknown */
+@import "tailwindcss";
+
+@theme {
+  --color-rivaas-night: oklch(8.3% 0.01 155);
+  --color-rivaas-dark: oklch(16.8% 0.012 155);
+  --color-rivaas-basalt: oklch(24.5% 0.013 155);
+  --color-rivaas-stone: oklch(44.2% 0.015 155);
+  --color-rivaas-fog: oklch(63.8% 0.012 155);
+  --color-rivaas-mist: oklch(94.2% 0.008 155);
+  --color-rivaas-white: oklch(98.5% 0.003 155);
+  --color-rivaas-alpine: oklch(45.8% 0.065 166);
+  --color-rivaas-alpine-dark: oklch(36.5% 0.062 166);
+  --color-rivaas-alpine-light: oklch(68.5% 0.11 166);
+  --color-rivaas-moss: oklch(54.2% 0.13 149);
+  --color-rivaas-glacier: oklch(62.3% 0.214 259.815);
+
+  --font-display: Inter, system-ui, sans-serif;
+  --font-sans: Inter, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+/* stylelint-enable at-rule-no-unknown */

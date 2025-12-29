@@ -45,14 +45,21 @@
   background-clip: text;
 }
 
+.metric-suffix {
+  margin-left: 0.15em;
+}
+
 // Package cards
 .package-card {
+  display: block;
   background: rgba($rivaas-basalt, 0.3);
   border: 1px solid rgba($rivaas-alpine, 0.2);
   border-radius: 12px;
   padding: 20px 24px;
   transition: all $transition-normal;
   backdrop-filter: blur(10px);
+  text-decoration: none;
+  color: inherit;
 
   &:hover {
     transform: translateY(-4px);
@@ -86,6 +93,25 @@
 
   &:hover::after {
     transform: scaleX(1);
+  }
+}
+
+.mobile-nav-link::after {
+  display: none;
+}
+
+#mobile-menu {
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

@@ -11,40 +11,53 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Rivaas - High-Performance Web Framework for Go">
+    <meta property="og:description" content="A high-performance, modular web framework for Go with integrated observability. 8.4M+ req/sec, 119ns latency, 16 bytes/request.">
+    <meta property="og:image" content="https://rivaas.dev/og-image.png">
+    <meta property="og:url" content="https://rivaas.dev">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Rivaas - High-Performance API Framework for Go">
+    <meta name="twitter:description" content="A high-performance, modular web framework for Go with integrated observability. 8.4M+ req/sec, 119ns latency, 16 bytes/request.">
+    <meta name="twitter:image" content="https://rivaas.dev/og-image.png">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="/styles/tailwind.css" as="style">
+    <link rel="preload" href="/styles/main.css" as="style">
+    
     <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'rivaas': {
-                            'night': '#0F1413',
-                            'dark': '#1F2A27',
-                            'basalt': '#2E3B39',
-                            'stone': '#5C6B66',
-                            'fog': '#8A9A95',
-                            'mist': '#E4F0EC',
-                            'white': '#F8FAF9',
-                            'alpine': '#1E6F5C',
-                            'alpine-dark': '#155A49',
-                            'alpine-light': '#3FAF98',
-                            'moss': '#2D8A55',
-                            'glacier': '#2563EB',
-                        }
-                    },
-                    fontFamily: {
-                        'display': ['Inter', 'system-ui', 'sans-serif'],
-                        'sans': ['Inter', 'system-ui', 'sans-serif'],
-                        'mono': ['JetBrains Mono', 'monospace'],
-                    }
-                }
-            }
-        }
-    </script>
+    <link rel="stylesheet" href="/styles/tailwind.css">
     
     <!-- Custom Styles -->
     <link rel="stylesheet" href="/styles/main.css">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Rivaas",
+      "description": "A high-performance, modular web framework for Go with integrated observability",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "programmingLanguage": "Go",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "url": "https://rivaas.dev",
+      "codeRepository": "https://github.com/rivaas-dev/rivaas",
+      "license": "https://www.apache.org/licenses/LICENSE-2.0"
+    }
+    </script>
 </head>
 <body class="text-slate-300">
     <!-- Particles -->
@@ -64,9 +77,25 @@
                     <a href="https://github.com/rivaas-dev/rivaas" class="nav-link">GitHub</a>
                     <a href="https://rivaas.dev/docs/getting-started" class="btn-primary text-sm">Get Started</a>
                 </div>
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-button" class="md:hidden text-slate-300 hover:text-white transition-colors" aria-label="Open menu" aria-expanded="false">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 flex flex-col gap-4">
+                <a href="#features" class="nav-link mobile-nav-link">Features</a>
+                <a href="#packages" class="nav-link mobile-nav-link">Packages</a>
+                <a href="https://rivaas.dev/docs" class="nav-link mobile-nav-link">Docs</a>
+                <a href="https://github.com/rivaas-dev/rivaas" class="nav-link mobile-nav-link">GitHub</a>
+                <a href="https://rivaas.dev/docs/getting-started" class="btn-primary text-sm text-center">Get Started</a>
             </div>
         </div>
     </nav>
+
+    <main>
 
     <!-- Hero Section -->
     <section class="relative min-h-screen hero-bg flex items-center justify-center overflow-hidden">
@@ -264,42 +293,46 @@
                 </p>
                 
                 <div class="grid md:grid-cols-3 gap-4">
-                    <div class="package-card reveal group">
+                    <a href="https://rivaas.dev/docs/reference/packages/app" class="package-card reveal group">
                         <code class="text-rivaas-alpine-light font-mono text-lg font-medium">app</code>
                         <p class="text-slate-400 text-sm mt-2">Batteries-included web framework</p>
-                    </div>
-                    <div class="package-card reveal group">
+                    </a>
+                    <a href="https://rivaas.dev/docs/reference/packages/router" class="package-card reveal group">
                         <code class="text-rivaas-alpine-light font-mono text-lg font-medium">router</code>
                         <p class="text-slate-400 text-sm mt-2">High-performance HTTP router</p>
-                    </div>
-                    <div class="package-card reveal group">
+                    </a>
+                    <a href="https://rivaas.dev/docs/reference/packages/binding" class="package-card reveal group">
                         <code class="text-rivaas-alpine-light font-mono text-lg font-medium">binding</code>
                         <p class="text-slate-400 text-sm mt-2">Request binding (JSON, form, query)</p>
-                    </div>
-                    <div class="package-card reveal group">
+                    </a>
+                    <a href="https://rivaas.dev/docs/reference/packages/validation" class="package-card reveal group">
                         <code class="text-rivaas-alpine-light font-mono text-lg font-medium">validation</code>
                         <p class="text-slate-400 text-sm mt-2">Struct validation with JSON Schema</p>
-                    </div>
-                    <div class="package-card reveal group">
+                    </a>
+                    <a href="https://rivaas.dev/docs/reference/packages/config" class="package-card reveal group">
+                        <code class="text-rivaas-alpine-light font-mono text-lg font-medium">config</code>
+                        <p class="text-slate-400 text-sm mt-2">Configuration management with validation</p>
+                    </a>
+                    <a href="https://rivaas.dev/docs/reference/packages/logging" class="package-card reveal group">
                         <code class="text-rivaas-alpine-light font-mono text-lg font-medium">logging</code>
                         <p class="text-slate-400 text-sm mt-2">Structured logging with slog</p>
-                    </div>
-                    <div class="package-card reveal group">
+                    </a>
+                    <a href="https://rivaas.dev/docs/reference/packages/metrics" class="package-card reveal group">
                         <code class="text-rivaas-alpine-light font-mono text-lg font-medium">metrics</code>
                         <p class="text-slate-400 text-sm mt-2">OpenTelemetry metrics</p>
-                    </div>
-                    <div class="package-card reveal group">
+                    </a>
+                    <a href="https://rivaas.dev/docs/reference/packages/tracing" class="package-card reveal group">
                         <code class="text-rivaas-alpine-light font-mono text-lg font-medium">tracing</code>
                         <p class="text-slate-400 text-sm mt-2">Distributed tracing with OTLP</p>
-                    </div>
-                    <div class="package-card reveal group">
+                    </a>
+                    <a href="https://rivaas.dev/docs/reference/packages/openapi" class="package-card reveal group">
                         <code class="text-rivaas-alpine-light font-mono text-lg font-medium">openapi</code>
                         <p class="text-slate-400 text-sm mt-2">Automatic OpenAPI 3.0/3.1 generation</p>
-                    </div>
-                    <div class="package-card reveal group">
+                    </a>
+                    <a href="https://rivaas.dev/docs/reference/packages/errors" class="package-card reveal group md:col-start-2">
                         <code class="text-rivaas-alpine-light font-mono text-lg font-medium">errors</code>
                         <p class="text-slate-400 text-sm mt-2">Error formatting (RFC 9457)</p>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -381,6 +414,7 @@
             </div>
         </div>
     </footer>
+    </main>
 
     <script src="/scripts/main.js"></script>
 </body>

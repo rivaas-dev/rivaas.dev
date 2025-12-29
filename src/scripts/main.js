@@ -1,3 +1,26 @@
+// Mobile menu toggle
+function setupMobileMenu() {
+    const menuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    if (menuButton && mobileMenu) {
+        menuButton.addEventListener('click', () => {
+            const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
+            menuButton.setAttribute('aria-expanded', !isExpanded);
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Close menu when clicking on links
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuButton.setAttribute('aria-expanded', 'false');
+            });
+        });
+    }
+}
+
 // Create floating particles
 function createParticles() {
     const container = document.getElementById('particles');
@@ -35,9 +58,11 @@ function animateCounters() {
             
             // Format with commas for large numbers
             if (target > 999999) {
-                counter.textContent = (current / 1000000).toFixed(1) + 'M' + suffix;
+                counter.innerHTML = (current / 1000000).toFixed(1) + 'M<span class="metric-suffix">' + suffix + '</span>';
+            } else if (suffix) {
+                counter.innerHTML = current.toLocaleString() + '<span class="metric-suffix">' + suffix + '</span>';
             } else {
-                counter.textContent = current.toLocaleString() + suffix;
+                counter.innerHTML = current.toLocaleString() + suffix;
             }
             
             if (progress < 1) {
@@ -50,7 +75,15 @@ function animateCounters() {
 }
 
 // Terminal typing animation
+let terminalAnimationStarted = false;
+
 function typeTerminal() {
+    // Prevent multiple runs
+    if (terminalAnimationStarted) {
+        return;
+    }
+    terminalAnimationStarted = true;
+    
     const lines = [
         { text: '$ go get rivaas.dev/app', delay: 0 },
         { text: '', delay: 600 },
@@ -71,6 +104,10 @@ function typeTerminal() {
     ];
     
     const container = document.getElementById('terminal-content');
+    if (!container) return;
+    
+    // Clear any existing content
+    container.innerHTML = '';
     
     lines.forEach((line, i) => {
         setTimeout(() => {
@@ -111,36 +148,37 @@ function setupReveal() {
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
+    setupMobileMenu();
     createParticles();
     setupReveal();
     
-    // Trigger counter animation when metrics are visible
-    const metricsObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                animateCounters();
-                metricsObserver.disconnect();
-            }
-        });
-    }, { threshold: 0.5 });
-    
+    // Trigger counter animation when metrics are visible (single observer pattern)
     const metricsSection = document.querySelector('.metric-value');
     if (metricsSection) {
+        const metricsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    metricsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        
         metricsObserver.observe(metricsSection.parentElement.parentElement);
     }
     
-    // Start terminal animation when visible
-    const terminalObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                typeTerminal();
-                terminalObserver.disconnect();
-            }
-        });
-    }, { threshold: 0.3 });
-    
+    // Start terminal animation when visible (simplified pattern)
     const terminal = document.getElementById('terminal-content');
     if (terminal) {
+        const terminalObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    typeTerminal();
+                    terminalObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+        
         terminalObserver.observe(terminal);
     }
 });

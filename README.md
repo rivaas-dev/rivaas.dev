@@ -27,10 +27,12 @@ The site will be available at `http://localhost:8080`
 
 ### Build Commands
 
-- `npm run build` - Build SCSS and copy HTML to `dist/`
+- `npm run build` - Build everything (CSS, JS, HTML, static files)
+- `npm run build:tailwind` - Build Tailwind CSS
 - `npm run build:scss` - Compile SCSS to CSS
 - `npm run build:js` - Minify JavaScript with Terser
-- `npm run build:html` - Copy HTML to dist
+- `npm run build:html` - Copy HTML and favicon to dist
+- `npm run build:static` - Copy SEO files (robots.txt, sitemaps) to dist
 - `npm run watch` - Watch for changes and rebuild automatically
 - `npm run serve` - Serve `dist/` folder on port 8080 (uses http-server)
 - `npm run dev` - Build + watch + serve (recommended for development)
@@ -42,10 +44,15 @@ The site will be available at `http://localhost:8080`
 rivaas.dev/
 ├── src/
 │   ├── index.html           # Main HTML file
+│   ├── favicon.svg          # Site favicon
+│   ├── robots.txt           # Search engine directives
+│   ├── sitemap.xml          # Sitemap index
+│   ├── sitemap-main.xml     # Landing page sitemap
 │   ├── scripts/
 │   │   └── main.js          # JavaScript source
 │   └── styles/
 │       ├── main.scss        # Main SCSS entry point
+│       ├── tailwind.css     # Tailwind configuration
 │       ├── _variables.scss  # Color palette & config
 │       ├── _base.scss       # Base styles
 │       ├── _animations.scss # Animations & effects

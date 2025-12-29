@@ -1,0 +1,6 @@
+# rivaas.dev - Allow all search engines
+User-agent: *
+Allow: /
+
+# Sitemap index that references both main site and docs
+Sitemap: https://rivaas.dev/sitemap.xml
