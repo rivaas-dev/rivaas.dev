@@ -1,69 +1,62 @@
 # rivaas.dev
 
-Official landing page for Rivaas - High-performance API framework for Go
+Landing page for Rivaas - a fast web framework for Go.
 
-🌐 **Live Site**: [rivaas.dev](https://rivaas.dev)
+🌐 **Live**: [rivaas.dev](https://rivaas.dev)
 
-## Development
+## Getting Started
 
-### Prerequisites
-
-- Node.js 20+ (see `.nvmrc`)
-
-### Setup
+You need Node.js 20 or newer.
 
 ```bash
-# Install dependencies
+# Install packages
 npm install
 
-# Build once
-npm run build
-
-# Development with watch mode + local server
+# Start dev server
 npm run dev
 ```
 
-The site will be available at `http://localhost:8080`
+Open `http://localhost:5173` in your browser.
 
-### Build Commands
+## Commands
 
-- `npm run build` - Build everything (CSS, JS, HTML, static files)
-- `npm run build:tailwind` - Build Tailwind CSS
-- `npm run build:scss` - Compile SCSS to CSS
-- `npm run build:js` - Minify JavaScript with Terser
-- `npm run build:html` - Copy HTML and favicon to dist
-- `npm run build:static` - Copy SEO files (robots.txt, sitemaps) to dist
-- `npm run watch` - Watch for changes and rebuild automatically
-- `npm run serve` - Serve `dist/` folder on port 8080 (uses http-server)
-- `npm run dev` - Build + watch + serve (recommended for development)
-- `npm run clean` - Clean build output
+| Command | What it does |
+|---------|--------------|
+| `npm run dev` | Start dev server with hot reload |
+| `npm run build` | Build for production |
+| `npm run preview` | Preview production build |
 
-## Project Structure
+## Tech Stack
+
+- **Vite** - Fast build tool
+- **Tailwind CSS v4** - Styling
+- **SCSS** - Custom styles
+- **Shiki** - Code syntax highlighting
+- **Fontsource** - Self-hosted fonts (Inter, JetBrains Mono)
+
+## Project Files
 
 ```
 rivaas.dev/
 ├── src/
-│   ├── index.html           # Main HTML file
-│   ├── favicon.svg          # Site favicon
-│   ├── robots.txt           # Search engine directives
-│   ├── sitemap.xml          # Sitemap index
-│   ├── sitemap-main.xml     # Landing page sitemap
+│   ├── index.html          # Main page
+│   ├── favicon.svg         # Site icon
+│   ├── robots.txt          # For search engines
+│   ├── sitemap.xml         # Site map
 │   ├── scripts/
-│   │   └── main.js          # JavaScript source
+│   │   └── main.js         # JavaScript
 │   └── styles/
-│       ├── main.scss        # Main SCSS entry point
-│       ├── tailwind.css     # Tailwind configuration
-│       ├── _variables.scss  # Color palette & config
-│       ├── _base.scss       # Base styles
-│       ├── _animations.scss # Animations & effects
-│       └── _components.scss # Component styles
-├── dist/                    # Build output (deployed to CF Pages)
-├── package.json
-├── .gitignore
-├── .nvmrc
-└── README.md
+│       ├── main.scss       # Style entry
+│       ├── tailwind.css    # Tailwind config
+│       ├── _variables.scss # Colors and fonts
+│       ├── _base.scss      # Base styles
+│       ├── _animations.scss
+│       └── _components.scss
+├── dist/                   # Build output
+├── vite.config.js          # Vite settings
+└── package.json
 ```
 
 ## License
 
-Apache License 2.0 - see [LICENSE](LICENSE) for details.
+Apache License 2.0 - see [LICENSE](LICENSE).
