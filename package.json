@@ -4,31 +4,13 @@
   "type": "module",
   "description": "Official landing page for Rivaas - High-performance API framework for Go",
   "scripts": {
-    "build:tailwind": "npx @tailwindcss/cli -i src/styles/tailwind.css -o dist/styles/tailwind.css --minify",
-    "build:scss": "npx sass src/styles/main.scss dist/styles/main.css --style=compressed --no-source-map",
-    "build:js": "npx terser src/scripts/main.js -o dist/scripts/main.js -c -m --comments false",
-    "build:html": "cp src/index.html dist/ && cp src/favicon.svg dist/ 2>/dev/null || true",
-    "build:static": "cp src/robots.txt src/sitemap.xml src/sitemap-main.xml dist/ 2>/dev/null || true",
-    "build": "npm run build:tailwind && npm run build:scss && npm run build:js && npm run build:html && npm run build:static",
-    "watch:tailwind": "npx @tailwindcss/cli -i src/styles/tailwind.css -o dist/styles/tailwind.css --watch",
-    "watch:scss": "npx sass --watch src/styles/main.scss:dist/styles/main.css",
-    "watch:js": "npx nodemon --watch src/scripts/main.js --exec 'npm run build:js'",
-    "watch:html": "npx nodemon --watch src/index.html --exec 'npm run build:html'",
-    "watch": "npx concurrently 'npm run watch:tailwind' 'npm run watch:scss' 'npm run watch:js' 'npm run watch:html'",
-    "serve": "npx http-server dist -p 8080 -c-1",
-    "dev": "npm run build && npx concurrently 'npm run watch' 'npm run serve'",
-    "clean": "rm -rf dist && mkdir -p dist/styles dist/scripts"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "devDependencies": {
-    "@tailwindcss/cli": "^4.1.18",
-    "autoprefixer": "^10.4.20",
-    "concurrently": "^9.1.0",
-    "http-server": "^14.1.1",
-    "nodemon": "^3.0.2",
-    "postcss": "^8.4.49",
-    "postcss-cli": "^11.0.1",
     "sass": "^1.70.0",
-    "terser": "^5.27.0"
+    "shiki": "^3.21.0"
   },
   "repository": {
     "type": "git",
@@ -42,5 +24,12 @@
     "landing-page"
   ],
   "author": "The Rivaas Authors",
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@fontsource-variable/inter": "^5.2.8",
+    "@fontsource-variable/jetbrains-mono": "^5.2.8",
+    "@tailwindcss/vite": "^4.1.18",
+    "tailwindcss": "^4.1.18",
+    "vite": "^7.3.1"
+  }
 }

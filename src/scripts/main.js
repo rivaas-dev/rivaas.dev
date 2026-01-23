@@ -1,3 +1,11 @@
+// Fonts (using explicit .css extension as per Fontsource docs)
+import '@fontsource-variable/inter/wght.css';
+import '@fontsource-variable/jetbrains-mono/wght.css';
+
+// Styles
+import '../styles/tailwind.css';
+import '../styles/main.scss';
+
 // Mobile menu toggle
 function setupMobileMenu() {
     const menuButton = document.getElementById('mobile-menu-button');
@@ -86,21 +94,20 @@ function typeTerminal() {
     
     const lines = [
         { text: '$ go get rivaas.dev/app', delay: 0 },
-        { text: '', delay: 600 },
         { text: '$ cat main.go', delay: 800 },
         { text: '', delay: 1000 },
-        { text: '<span class="syn-keyword">package</span> main', delay: 1200 },
+        { text: '<span style="color:#E67E80">package</span><span style="color:#DBBC7F"> main</span>', delay: 1200 },
         { text: '', delay: 1300 },
-        { text: '<span class="syn-keyword">import</span> <span class="syn-string">"rivaas.dev/app"</span>', delay: 1400 },
+        { text: '<span style="color:#E67E80">import</span><span style="color:#A7C080"> "</span><span style="color:#DBBC7F">rivaas.dev/app</span><span style="color:#A7C080">"</span>', delay: 1400 },
         { text: '', delay: 1500 },
-        { text: '<span class="syn-keyword">func</span> <span class="syn-func">main</span>() {', delay: 1600 },
-        { text: '    a, _ := app.<span class="syn-func">New</span>()', delay: 1700 },
-        { text: '    a.<span class="syn-func">GET</span>(<span class="syn-string">"/"</span>, handler)', delay: 1800 },
-        { text: '    a.<span class="syn-func">Start</span>(ctx, <span class="syn-string">":8080"</span>)', delay: 1900 },
-        { text: '}', delay: 2000 },
+        { text: '<span style="color:#E67E80">func</span><span style="color:#7FBBB3"> main</span><span style="color:#D3C6AA">() {</span>', delay: 1600 },
+        { text: '<span style="color:#D3C6AA">    a, _ </span><span style="color:#E67E80">:=</span><span style="color:#D3C6AA"> app.</span><span style="color:#7FBBB3">New</span><span style="color:#D3C6AA">()</span>', delay: 1700 },
+        { text: '<span style="color:#D3C6AA">    a.</span><span style="color:#7FBBB3">GET</span><span style="color:#D3C6AA">(</span><span style="color:#A7C080">"/"</span><span style="color:#D3C6AA">, handler)</span>', delay: 1800 },
+        { text: '<span style="color:#D3C6AA">    a.</span><span style="color:#7FBBB3">Start</span><span style="color:#D3C6AA">(ctx, </span><span style="color:#A7C080">":8080"</span><span style="color:#D3C6AA">)</span>', delay: 1900 },
+        { text: '<span style="color:#D3C6AA">}</span>', delay: 2000 },
         { text: '', delay: 2200 },
         { text: '$ go run main.go', delay: 2400 },
-        { text: '<span style="color: #3FAF98">🚀 Rivaas listening on :8080</span>', delay: 2800 },
+        { text: '<span style="color:#A7C080">🚀 Rivaas listening on :8080</span>', delay: 2800 },
     ];
     
     const container = document.getElementById('terminal-content');

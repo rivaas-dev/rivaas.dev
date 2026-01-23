@@ -5,12 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rivaas - High-Performance Web Framework for Go</title>
     <meta name="description" content="A high-performance, modular web framework for Go with integrated observability. 8.4M+ req/sec, 119ns latency, 16 bytes/request.">
-    
-    <!-- Fonts: Inter for everything (matching docs), JetBrains Mono for code -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="icon" type="image/png" href="/favicon.png">
@@ -28,15 +23,8 @@
     <meta name="twitter:description" content="A high-performance, modular web framework for Go with integrated observability. 8.4M+ req/sec, 119ns latency, 16 bytes/request.">
     <meta name="twitter:image" content="https://rivaas.dev/og-image.png">
     
-    <!-- Preload Critical Resources -->
-    <link rel="preload" href="/styles/tailwind.css" as="style">
-    <link rel="preload" href="/styles/main.css" as="style">
-    
-    <!-- Tailwind CSS -->
-    <link rel="stylesheet" href="/styles/tailwind.css">
-    
-    <!-- Custom Styles -->
-    <link rel="stylesheet" href="/styles/main.css">
+    <!-- Vite will inject styles automatically -->
+    <script type="module" src="/scripts/main.js"></script>
     
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -178,8 +166,9 @@
     <section id="features" class="py-24 relative section-glow">
         <div class="container mx-auto px-6">
             <div class="max-w-5xl mx-auto">
-                <h2 class="font-display text-3xl md:text-4xl font-semibold text-white text-center mb-4 reveal">
+                <h2 id="features" class="section-heading font-display text-3xl md:text-4xl font-semibold text-white text-center mb-4 reveal">
                     Built for production
+                    <a href="#features" class="anchor-link" aria-label="Link to Built for production section">#</a>
                 </h2>
                 <p class="text-slate-400 text-center mb-16 max-w-2xl mx-auto reveal">
                     Everything you need to build, deploy, and operate web services at scale.
@@ -256,26 +245,7 @@
                         <div class="terminal-dot bg-green-500"></div>
                         <span class="text-slate-500 text-sm ml-4 font-mono">main.go</span>
                     </div>
-                    <div class="terminal-body text-sm"><pre><span class="syn-keyword">a</span> := <span class="syn-type">app</span>.<span class="syn-func">New</span>(
-    <span class="syn-comment">// Service identity</span>
-    app.<span class="syn-func">WithServiceName</span>(<span class="syn-string">"my-api"</span>),
-    app.<span class="syn-func">WithServiceVersion</span>(<span class="syn-string">"v1.2.3"</span>),
-    
-    <span class="syn-comment">// Observability: metrics + tracing + logging</span>
-    app.<span class="syn-func">WithObservability</span>(
-        app.<span class="syn-func">WithMetrics</span>(),
-        app.<span class="syn-func">WithTracing</span>(tracing.<span class="syn-func">WithOTLP</span>(<span class="syn-string">"localhost:4317"</span>)),
-        app.<span class="syn-func">WithLogging</span>(logging.<span class="syn-func">WithJSONHandler</span>()),
-    ),
-    
-    <span class="syn-comment">// OpenAPI documentation</span>
-    app.<span class="syn-func">WithOpenAPI</span>(openapi.<span class="syn-func">WithTitle</span>(<span class="syn-string">"My API"</span>)),
-    
-    <span class="syn-comment">// Health & readiness checks</span>
-    app.<span class="syn-func">WithHealthEndpoints</span>(
-        app.<span class="syn-func">WithReadinessCheck</span>(<span class="syn-string">"database"</span>, dbPingCheck),
-    ),
-)</pre></div>
+                    <div class="terminal-body text-sm"><!-- SHIKI:mainConfig --></div>
                 </div>
             </div>
         </div>
@@ -285,8 +255,9 @@
     <section id="packages" class="py-24 relative section-glow">
         <div class="container mx-auto px-6">
             <div class="max-w-5xl mx-auto">
-                <h2 class="font-display text-3xl md:text-4xl font-semibold text-white text-center mb-4 reveal">
+                <h2 id="packages" class="section-heading font-display text-3xl md:text-4xl font-semibold text-white text-center mb-4 reveal">
                     Modular packages
+                    <a href="#packages" class="anchor-link" aria-label="Link to Modular packages section">#</a>
                 </h2>
                 <p class="text-slate-400 text-center mb-16 reveal">
                     <strong class="text-white font-semibold">Truly modular.</strong> Use what you need. Each package works standalone—no framework lock-in.
@@ -415,7 +386,5 @@
         </div>
     </footer>
     </main>
-
-    <script src="/scripts/main.js"></script>
 </body>
 </html>

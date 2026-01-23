@@ -2,7 +2,7 @@
 
 // Terminal
 .terminal {
-  background: linear-gradient(180deg, $rivaas-basalt 0%, #252F2C 100%);
+  background: linear-gradient(180deg, $rivaas-basalt 0%, $rivaas-slate 100%);
   border: 1px solid rgba($rivaas-alpine, 0.3);
   border-radius: 12px;
   overflow: hidden;
@@ -31,8 +31,12 @@
   padding: 20px 24px;
   font-family: $font-mono;
   font-size: 14px;
-  line-height: 1.7;
+  line-height: 1.2;
   white-space: pre-wrap;
+}
+
+.terminal-line {
+  line-height: 1.55;
 }
 
 // Metrics
@@ -171,10 +175,38 @@
   }
 }
 
-// Code syntax colors
-.syn-keyword { color: #ff79c6; }
-.syn-string { color: #f1fa8c; }
-.syn-func { color: #50fa7b; }
-.syn-type { color: #8be9fd; }
-.syn-comment { color: #6272a4; }
-.syn-number { color: #bd93f9; }
+// Section headings with anchor links
+.section-heading {
+  position: relative;
+  scroll-margin-top: 80px;
+  
+  .anchor-link {
+    opacity: 0;
+    margin-left: 0.5rem;
+    color: $rivaas-fog;
+    text-decoration: none;
+    transition: opacity $transition-fast, color $transition-fast;
+    display: inline-block;
+    font-size: 0.7em;
+    vertical-align: middle;
+    
+    &:hover {
+      color: $rivaas-alpine-light;
+    }
+  }
+  
+  &:hover .anchor-link {
+    opacity: 1;
+  }
+}
+
+// Shiki syntax highlighting theme styles
+.shiki {
+  background: transparent !important;
+  font-family: $font-mono;
+  line-height: 1.45;
+  
+  code {
+    background: transparent;
+  }
+}

@@ -1,20 +1,47 @@
 // Rivaas Color Palette - Alpine Mountains
-$rivaas-night: #0F1413;
-$rivaas-dark: #1F2A27;
-$rivaas-basalt: #2E3B39;
-$rivaas-stone: #5C6B66;
-$rivaas-fog: #8A9A95;
-$rivaas-mist: #E4F0EC;
-$rivaas-white: #F8FAF9;
-$rivaas-alpine: #1E6F5C;
-$rivaas-alpine-dark: #155A49;
-$rivaas-alpine-light: #3FAF98;
-$rivaas-moss: #2D8A55;
-$rivaas-glacier: #2563EB;
+// Synced with docs/_variables_project.scss
+
+// ========================================
+// Core Neutrals (synced with docs grays)
+// ========================================
+$rivaas-white: #F8FAF9;        // docs: $white
+$rivaas-cloud: #F5F7F6;        // docs: $gray-50
+$rivaas-frost: #F1F4F3;        // docs: $gray-100
+$rivaas-mist: #E4F0EC;         // docs: $gray-200
+$rivaas-ash: #D6DEDA;          // docs: $gray-300
+$rivaas-pebble: #B5C2BC;       // docs: $gray-400
+$rivaas-fog: #8A9A95;          // docs: $gray-500
+$rivaas-stone: #5C6B66;        // docs: $gray-600
+$rivaas-basalt: #2E3B39;       // docs: $gray-700
+$rivaas-slate: #252F2C;        // docs: $gray-800
+$rivaas-dark: #1F2A27;         // docs: $gray-900
+$rivaas-night: #0F1413;        // docs: $black
+
+// ========================================
+// Brand Colors (Alpine Green)
+// ========================================
+$rivaas-alpine: #1E6F5C;       // docs: $primary
+$rivaas-alpine-dark: #155A49;  // docs: $primary-dark
+$rivaas-alpine-light: #3FAF98; // docs: $dark-accent
+
+// ========================================
+// Dark Mode Surface (for landing page)
+// ========================================
+$rivaas-surface: #1A2220;      // docs: $dark-surface
+$rivaas-text: #E6ECE9;         // docs: $dark-text
+$rivaas-text-muted: #A3B1AB;   // docs: $dark-text-muted
+
+// ========================================
+// Semantic Colors
+// ========================================
+$rivaas-moss: #2D8A55;         // docs: $success
+$rivaas-glacier: #2563EB;      // docs: $info
+$rivaas-amber: #D97706;        // docs: $warning
+$rivaas-rust: #B33D28;         // docs: $danger
 
 // Typography
-$font-display: 'Inter', system-ui, sans-serif;
-$font-mono: 'JetBrains Mono', monospace;
+$font-display: 'Inter Variable', system-ui, sans-serif;
+$font-mono: 'JetBrains Mono Variable', monospace;
 
 // Breakpoints
 $breakpoint-sm: 640px;
