@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite'
+import { readFileSync, writeFileSync } from 'fs'
 import tailwindcss from '@tailwindcss/vite'
 import { codeToHtml } from 'shiki'
 
@@ -41,6 +42,34 @@ func main() {
 }`
 }
 
+// Vite plugin to update sitemap lastmod dates on build
+// Replaces <!-- LASTMOD --> placeholder with current date in YYYY-MM-DD format
+function updateSitemapPlugin() {
+  return {
+    name: 'vite-plugin-update-sitemap',
+    writeBundle(options, bundle) {
+      const today = new Date().toISOString().split('T')[0]
+      const outDir = options.dir || 'dist'
+      const sitemapFiles = ['sitemap.xml', 'sitemap-main.xml']
+
+      sitemapFiles.forEach(file => {
+        const filePath = `${outDir}/${file}`
+        try {
+          const content = readFileSync(filePath, 'utf8')
+          if (!content.includes('<!-- LASTMOD -->')) {
+            return // No placeholder to replace
+          }
+          const updated = content.replace(/<!-- LASTMOD -->/g, today)
+          writeFileSync(filePath, updated)
+          console.log(`[sitemap] Updated ${file} with lastmod: ${today}`)
+        } catch (err) {
+          console.warn(`[sitemap] Could not update ${file}:`, err.message)
+        }
+      })
+    }
+  }
+}
+
 // Vite plugin for Shiki syntax highlighting
 function shikiPlugin() {
   // Cache highlighted code to avoid re-highlighting on every request
@@ -76,6 +105,7 @@ function shikiPlugin() {
 
 export default defineConfig({
   plugins: [
+    updateSitemapPlugin(),
     shikiPlugin(),
     tailwindcss()
   ],
