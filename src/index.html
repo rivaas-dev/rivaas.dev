@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rivaas - High-Performance API Framework for Go | 8M+ req/sec</title>
-    <meta name="description" content="Build production-ready APIs in Go with Rivaas. 8.4M+ req/sec, 119ns latency, built-in OpenTelemetry, automatic OpenAPI docs. Modular, cloud-native, fast.">
+    <meta name="description" content="Build production-ready APIs in Go with Rivaas, a high-performance framework. 8.4M+ req/sec, 119ns latency, built-in OpenTelemetry, automatic OpenAPI docs.">
     <meta name="keywords" content="Go web framework, Golang HTTP router, high-performance API, Go microservices, OpenTelemetry Go, Go observability, REST API Go, Go HTTP framework, cloud-native Go, production-ready Go framework">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Rivaas Team">
@@ -12,12 +12,13 @@
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="icon" type="image/png" href="/favicon.png">
     
     <!-- Open Graph -->
     <meta property="og:title" content="Rivaas - High-Performance API Framework for Go | 8M+ req/sec">
-    <meta property="og:description" content="Build production-ready APIs in Go with Rivaas. 8.4M+ req/sec, 119ns latency, built-in OpenTelemetry, automatic OpenAPI docs. Modular, cloud-native, fast.">
+    <meta property="og:description" content="Build production-ready APIs in Go with Rivaas, a high-performance framework. 8.4M+ req/sec, 119ns latency, built-in OpenTelemetry, automatic OpenAPI docs.">
     <meta property="og:image" content="https://rivaas.dev/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:url" content="https://rivaas.dev">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Rivaas">
@@ -25,8 +26,22 @@
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Rivaas - High-Performance API Framework for Go | 8M+ req/sec">
-    <meta name="twitter:description" content="Build production-ready APIs in Go with Rivaas. 8.4M+ req/sec, 119ns latency, built-in OpenTelemetry, automatic OpenAPI docs. Modular, cloud-native, fast.">
+    <meta name="twitter:description" content="Build production-ready APIs in Go with Rivaas, a high-performance framework. 8.4M+ req/sec, 119ns latency, built-in OpenTelemetry, automatic OpenAPI docs.">
     <meta name="twitter:image" content="https://rivaas.dev/og-image.png">
+    
+    <!-- Resource hints for external domains -->
+    <link rel="preconnect" href="https://github.com" crossorigin>
+    <link rel="dns-prefetch" href="https://github.com">
+    
+    <!-- Noscript fallback for animated metrics -->
+    <noscript>
+        <style>
+            .metric-value[data-target="8400000"]::after { content: "8.4M+"; }
+            .metric-value[data-target="119"]::after { content: "119ns"; }
+            .metric-value[data-target="16"]::after { content: "16B"; }
+            .metric-value { font-size: 0; }
+        </style>
+    </noscript>
     
     <!-- Vite will inject styles automatically -->
     <script type="module" src="/scripts/main.js"></script>
@@ -53,10 +68,17 @@
     </script>
 </head>
 <body class="text-slate-300">
-    <!-- Particles -->
-    <div class="particles" id="particles"></div>
+    <!-- Skip to content link -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-rivaas-alpine focus:text-white focus:px-4 focus:py-2 focus:rounded">
+        Skip to content
+    </a>
     
-    <!-- Navigation -->
+    <!-- Particles -->
+    <div class="particles" id="particles" aria-hidden="true"></div>
+    
+    <!-- ==============================
+         Navigation
+         ============================== -->
     <nav class="fixed top-0 left-0 right-0 z-50 bg-rivaas-night/95 backdrop-blur-lg border-b border-white/5">
         <div class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
@@ -66,12 +88,12 @@
                 <div class="hidden md:flex items-center gap-8">
                     <a href="#features" class="nav-link">Features</a>
                     <a href="#packages" class="nav-link">Packages</a>
-                    <a href="https://rivaas.dev/docs" class="nav-link">Docs</a>
-                    <a href="https://github.com/rivaas-dev/rivaas" class="nav-link">GitHub</a>
-                    <a href="https://rivaas.dev/docs/getting-started" class="btn-primary text-sm">Get Started</a>
+                    <a href="https://rivaas.dev/docs" class="nav-link" target="_blank" rel="noopener noreferrer">Docs</a>
+                    <a href="https://github.com/rivaas-dev/rivaas" class="nav-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="https://rivaas.dev/docs/getting-started" class="btn-primary text-sm" target="_blank" rel="noopener noreferrer">Get Started</a>
                 </div>
                 <!-- Mobile menu button -->
-                <button id="mobile-menu-button" class="md:hidden text-slate-300 hover:text-white transition-colors" aria-label="Open menu" aria-expanded="false">
+                <button id="mobile-menu-button" class="md:hidden text-slate-300 hover:text-white transition-colors" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                     </svg>
@@ -81,16 +103,18 @@
             <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 flex flex-col gap-4">
                 <a href="#features" class="nav-link mobile-nav-link">Features</a>
                 <a href="#packages" class="nav-link mobile-nav-link">Packages</a>
-                <a href="https://rivaas.dev/docs" class="nav-link mobile-nav-link">Docs</a>
-                <a href="https://github.com/rivaas-dev/rivaas" class="nav-link mobile-nav-link">GitHub</a>
-                <a href="https://rivaas.dev/docs/getting-started" class="btn-primary text-sm text-center">Get Started</a>
+                <a href="https://rivaas.dev/docs" class="nav-link mobile-nav-link" target="_blank" rel="noopener noreferrer">Docs</a>
+                <a href="https://github.com/rivaas-dev/rivaas" class="nav-link mobile-nav-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="https://rivaas.dev/docs/getting-started" class="btn-primary text-sm text-center" target="_blank" rel="noopener noreferrer">Get Started</a>
             </div>
         </div>
     </nav>
 
-    <main>
+    <main id="main-content">
 
-    <!-- Hero Section -->
+    <!-- ==============================
+         Hero Section
+         ============================== -->
     <section class="relative min-h-screen hero-bg flex items-center justify-center overflow-hidden">
         <div class="persian-pattern"></div>
         <div class="mountains"></div>
@@ -125,10 +149,10 @@
                 
                 <!-- CTA buttons -->
                 <div class="flex flex-col sm:flex-row gap-4 justify-center reveal" style="animation-delay: 0.3s;">
-                    <a href="https://rivaas.dev/docs/getting-started" class="btn-primary">
+                    <a href="https://rivaas.dev/docs/getting-started" class="btn-primary" target="_blank" rel="noopener noreferrer">
                         Get Started →
                     </a>
-                    <a href="https://github.com/rivaas-dev/rivaas" class="btn-secondary">
+                    <a href="https://github.com/rivaas-dev/rivaas" class="btn-secondary" target="_blank" rel="noopener noreferrer">
                         View on GitHub
                     </a>
                 </div>
@@ -136,14 +160,16 @@
         </div>
         
         <!-- Scroll indicator -->
-        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-slate-500 animate-bounce">
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-slate-500 animate-bounce" aria-hidden="true">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
             </svg>
         </div>
     </section>
 
-    <!-- Terminal Demo Section -->
+    <!-- ==============================
+         Terminal Demo Section
+         ============================== -->
     <section class="py-24 relative section-glow">
         <div class="container mx-auto px-6">
             <div class="max-w-4xl mx-auto">
@@ -163,15 +189,20 @@
                     </div>
                     <div class="terminal-body" id="terminal-content"><!-- Content injected by JS --></div>
                 </div>
+                <noscript>
+                    <p class="text-slate-400 text-center p-4">Enable JavaScript to view the interactive demo.</p>
+                </noscript>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
+    <!-- ==============================
+         Features Section
+         ============================== -->
     <section id="features" class="py-24 relative section-glow">
         <div class="container mx-auto px-6">
             <div class="max-w-5xl mx-auto">
-                <h2 id="features" class="section-heading font-display text-3xl md:text-4xl font-semibold text-white text-center mb-4 reveal">
+                <h2 class="section-heading font-display text-3xl md:text-4xl font-semibold text-white text-center mb-4 reveal">
                     Built for production
                     <a href="#features" class="anchor-link" aria-label="Link to Built for production section">#</a>
                 </h2>
@@ -232,7 +263,9 @@
         </div>
     </section>
 
-    <!-- Code Example Section -->
+    <!-- ==============================
+         Code Example Section
+         ============================== -->
     <section class="py-24 relative">
         <div class="container mx-auto px-6">
             <div class="max-w-4xl mx-auto">
@@ -250,17 +283,20 @@
                         <div class="terminal-dot bg-green-500"></div>
                         <span class="text-slate-500 text-sm ml-4 font-mono">main.go</span>
                     </div>
+                    <!-- Code block rendered at build time by Shiki syntax highlighter (see vite.config.js) -->
                     <div class="terminal-body text-sm"><!-- SHIKI:mainConfig --></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Packages Section -->
+    <!-- ==============================
+         Packages Section
+         ============================== -->
     <section id="packages" class="py-24 relative section-glow">
         <div class="container mx-auto px-6">
             <div class="max-w-5xl mx-auto">
-                <h2 id="packages" class="section-heading font-display text-3xl md:text-4xl font-semibold text-white text-center mb-4 reveal">
+                <h2 class="section-heading font-display text-3xl md:text-4xl font-semibold text-white text-center mb-4 reveal">
                     Modular packages
                     <a href="#packages" class="anchor-link" aria-label="Link to Modular packages section">#</a>
                 </h2>
@@ -269,52 +305,50 @@
                 </p>
                 
                 <div class="grid md:grid-cols-3 gap-4">
-                    <a href="https://rivaas.dev/docs/reference/packages/app" class="package-card reveal group">
+                    <a href="https://rivaas.dev/docs/guides/app" class="package-card reveal group" target="_blank" rel="noopener noreferrer">
                         <code class="text-rivaas-alpine-light font-mono text-lg font-medium">app</code>
                         <p class="text-slate-400 text-sm mt-2">Batteries-included web framework</p>
                     </a>
-                    <a href="https://rivaas.dev/docs/reference/packages/router" class="package-card reveal group">
+                    <a href="https://rivaas.dev/docs/guides/router" class="package-card reveal group" target="_blank" rel="noopener noreferrer">
                         <code class="text-rivaas-alpine-light font-mono text-lg font-medium">router</code>
                         <p class="text-slate-400 text-sm mt-2">High-performance HTTP router</p>
                     </a>
-                    <a href="https://rivaas.dev/docs/reference/packages/binding" class="package-card reveal group">
+                    <a href="https://rivaas.dev/docs/guides/binding" class="package-card reveal group" target="_blank" rel="noopener noreferrer">
                         <code class="text-rivaas-alpine-light font-mono text-lg font-medium">binding</code>
                         <p class="text-slate-400 text-sm mt-2">Request binding (JSON, form, query)</p>
                     </a>
-                    <a href="https://rivaas.dev/docs/reference/packages/validation" class="package-card reveal group">
+                    <a href="https://rivaas.dev/docs/guides/validation" class="package-card reveal group" target="_blank" rel="noopener noreferrer">
                         <code class="text-rivaas-alpine-light font-mono text-lg font-medium">validation</code>
                         <p class="text-slate-400 text-sm mt-2">Struct validation with JSON Schema</p>
                     </a>
-                    <a href="https://rivaas.dev/docs/reference/packages/config" class="package-card reveal group">
+                    <a href="https://rivaas.dev/docs/guides/config" class="package-card reveal group" target="_blank" rel="noopener noreferrer">
                         <code class="text-rivaas-alpine-light font-mono text-lg font-medium">config</code>
                         <p class="text-slate-400 text-sm mt-2">Configuration management with validation</p>
                     </a>
-                    <a href="https://rivaas.dev/docs/reference/packages/logging" class="package-card reveal group">
+                    <a href="https://rivaas.dev/docs/guides/logging" class="package-card reveal group" target="_blank" rel="noopener noreferrer">
                         <code class="text-rivaas-alpine-light font-mono text-lg font-medium">logging</code>
                         <p class="text-slate-400 text-sm mt-2">Structured logging with slog</p>
                     </a>
-                    <a href="https://rivaas.dev/docs/reference/packages/metrics" class="package-card reveal group">
+                    <a href="https://rivaas.dev/docs/guides/metrics" class="package-card reveal group" target="_blank" rel="noopener noreferrer">
                         <code class="text-rivaas-alpine-light font-mono text-lg font-medium">metrics</code>
                         <p class="text-slate-400 text-sm mt-2">OpenTelemetry metrics</p>
                     </a>
-                    <a href="https://rivaas.dev/docs/reference/packages/tracing" class="package-card reveal group">
+                    <a href="https://rivaas.dev/docs/guides/tracing" class="package-card reveal group" target="_blank" rel="noopener noreferrer">
                         <code class="text-rivaas-alpine-light font-mono text-lg font-medium">tracing</code>
                         <p class="text-slate-400 text-sm mt-2">Distributed tracing with OTLP</p>
                     </a>
-                    <a href="https://rivaas.dev/docs/reference/packages/openapi" class="package-card reveal group">
+                    <a href="https://rivaas.dev/docs/guides/openapi" class="package-card reveal group" target="_blank" rel="noopener noreferrer">
                         <code class="text-rivaas-alpine-light font-mono text-lg font-medium">openapi</code>
                         <p class="text-slate-400 text-sm mt-2">Automatic OpenAPI 3.0/3.1 generation</p>
-                    </a>
-                    <a href="https://rivaas.dev/docs/reference/packages/errors" class="package-card reveal group md:col-start-2">
-                        <code class="text-rivaas-alpine-light font-mono text-lg font-medium">errors</code>
-                        <p class="text-slate-400 text-sm mt-2">Error formatting (RFC 9457)</p>
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Philosophy Section -->
+    <!-- ==============================
+         Philosophy Section
+         ============================== -->
     <section class="py-24 relative">
         <div class="container mx-auto px-6">
             <div class="max-w-3xl mx-auto text-center">
@@ -353,7 +387,9 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
+    <!-- ==============================
+         CTA Section
+         ============================== -->
     <section class="py-24 relative">
         <div class="container mx-auto px-6">
             <div class="max-w-3xl mx-auto text-center reveal">
@@ -364,10 +400,10 @@
                     <span class="text-slate-500">$</span> <span class="text-white">go get rivaas.dev/app</span>
                 </div>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="https://rivaas.dev/docs/getting-started" class="btn-primary">
+                    <a href="https://rivaas.dev/docs/getting-started" class="btn-primary" target="_blank" rel="noopener noreferrer">
                         Read the Docs →
                     </a>
-                    <a href="https://github.com/rivaas-dev/rivaas/tree/main/app/examples" class="btn-secondary">
+                    <a href="https://github.com/rivaas-dev/rivaas/tree/main/app/examples" class="btn-secondary" target="_blank" rel="noopener noreferrer">
                         View Examples
                     </a>
                 </div>
@@ -375,7 +411,9 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- ==============================
+         Footer
+         ============================== -->
     <footer class="py-12 border-t border-white/5">
         <div class="container mx-auto px-6">
             <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
@@ -383,9 +421,9 @@
                     Apache License 2.0 · Made with ❤️ for the Go community
                 </div>
                 <div class="flex items-center gap-8 text-sm">
-                    <a href="https://github.com/rivaas-dev/rivaas" class="nav-link">GitHub</a>
-                    <a href="https://rivaas.dev/docs" class="nav-link">Docs</a>
-                    <a href="https://pkg.go.dev/rivaas.dev/app" class="nav-link">pkg.go.dev</a>
+                    <a href="https://github.com/rivaas-dev/rivaas" class="nav-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="https://rivaas.dev/docs" class="nav-link" target="_blank" rel="noopener noreferrer">Docs</a>
+                    <a href="https://pkg.go.dev/rivaas.dev/app" class="nav-link" target="_blank" rel="noopener noreferrer">pkg.go.dev</a>
                 </div>
             </div>
         </div>
