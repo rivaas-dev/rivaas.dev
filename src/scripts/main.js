@@ -153,11 +153,136 @@ function setupReveal() {
     reveals.forEach(el => observer.observe(el));
 }
 
+// Fetch and render benchmarks
+async function renderBenchmarks() {
+    const container = document.getElementById('benchmark-charts');
+    const metaElement = document.getElementById('benchmark-meta');
+    
+    if (!container) return;
+    
+    try {
+        const response = await fetch('/benchmarks.json');
+        const data = await response.json();
+        
+        // Update metadata
+        if (metaElement) {
+            metaElement.textContent = `Go ${data.go_version} • ${data.cpu} • Updated ${data.updated}`;
+        }
+        
+        // Create a container for both scenarios side by side
+        const scenariosContainer = document.createElement('div');
+        scenariosContainer.className = 'benchmark-scenarios-grid';
+        
+        // Calculate global max across all scenarios for consistent scaling
+        const globalMax = Math.max(...data.scenarios.flatMap(s => s.results.map(r => r.ns_op)));
+        const BAR_MAX_HEIGHT = 240; // px - must match .benchmark-bar-wrapper height in CSS
+        
+        // Render each scenario as a vertical bar chart
+        data.scenarios.forEach(scenario => {
+            const scenarioDiv = document.createElement('div');
+            scenarioDiv.className = 'benchmark-scenario';
+            
+            const title = document.createElement('h3');
+            title.className = 'font-display text-xl font-semibold text-white mb-2 text-center';
+            title.textContent = `${scenario.name} Route`;
+            scenarioDiv.appendChild(title);
+            
+            const pathLabel = document.createElement('p');
+            pathLabel.className = 'text-sm text-slate-500 mb-6 font-mono text-center';
+            pathLabel.textContent = `GET ${scenario.path} · ns/op`;
+            scenarioDiv.appendChild(pathLabel);
+            
+            // Sort results by ns_op (ascending) for consistent ordering
+            const sortedResults = [...scenario.results].sort((a, b) => a.ns_op - b.ns_op);
+            
+            // Create vertical bars container
+            const barsContainer = document.createElement('div');
+            barsContainer.className = 'benchmark-bars-container';
+            
+            sortedResults.forEach(result => {
+                const barGroup = document.createElement('div');
+                barGroup.className = 'benchmark-bar-group';
+                if (result.framework === 'Rivaas') {
+                    barGroup.classList.add('benchmark-highlight');
+                }
+                
+                // Value label (on top)
+                const valueLabel = document.createElement('div');
+                valueLabel.className = 'benchmark-bar-value';
+                valueLabel.innerHTML = `<span class="font-mono">${result.ns_op.toFixed(1)}</span>`;
+                barGroup.appendChild(valueLabel);
+                
+                // Bar container (with fixed height, bars grow upward)
+                const barWrapper = document.createElement('div');
+                barWrapper.className = 'benchmark-bar-wrapper';
+                
+                const bar = document.createElement('div');
+                bar.className = 'benchmark-bar-vertical';
+                const heightPx = Math.max(4, Math.round((result.ns_op / globalMax) * BAR_MAX_HEIGHT));
+                bar.style.height = '0px'; // Start at 0 for animation
+                bar.dataset.height = heightPx;
+                
+                barWrapper.appendChild(bar);
+                barGroup.appendChild(barWrapper);
+                
+                // Framework label (below bar)
+                const label = document.createElement('div');
+                label.className = 'benchmark-bar-label';
+                label.textContent = result.framework;
+                barGroup.appendChild(label);
+                
+                // Allocation badge (below label)
+                const badge = document.createElement('div');
+                badge.className = 'benchmark-badge-below';
+                if (result.allocs_op === 0) {
+                    badge.classList.add('badge-zero');
+                    badge.textContent = '0 alloc';
+                } else {
+                    const allocText = result.allocs_op === 1 ? 'alloc' : 'allocs';
+                    badge.textContent = `${result.allocs_op.toFixed(0)} ${allocText}`;
+                }
+                barGroup.appendChild(badge);
+                
+                barsContainer.appendChild(barGroup);
+            });
+            
+            scenarioDiv.appendChild(barsContainer);
+            scenariosContainer.appendChild(scenarioDiv);
+        });
+        
+        container.appendChild(scenariosContainer);
+        
+        // Animate bars when visible
+        const chartsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bars = entry.target.querySelectorAll('.benchmark-bar-vertical');
+                    bars.forEach((bar, index) => {
+                        setTimeout(() => {
+                            bar.style.height = bar.dataset.height + 'px';
+                        }, index * 80);
+                    });
+                    chartsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+        
+        chartsObserver.observe(container);
+        
+    } catch (error) {
+        console.error('Failed to load benchmarks:', error);
+        if (container) {
+            container.innerHTML = '<p class="text-slate-500 text-center">Failed to load benchmark data.</p>';
+        }
+    }
+}
+
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     setupMobileMenu();
     createParticles();
     setupReveal();
+    renderBenchmarks();
     
     // Trigger counter animation when metrics are visible (single observer pattern)
     const metricsSection = document.querySelector('.metric-value');

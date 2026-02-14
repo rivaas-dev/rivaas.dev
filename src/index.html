@@ -90,6 +90,7 @@
                 </div>
                 <div class="hidden md:flex items-center gap-8">
                     <a href="#features" class="nav-link">Features</a>
+                    <a href="#benchmarks" class="nav-link">Benchmarks</a>
                     <a href="#packages" class="nav-link">Packages</a>
                     <a href="https://rivaas.dev/docs" class="nav-link" target="_blank" rel="noopener noreferrer">Docs</a>
                     <a href="https://github.com/rivaas-dev/rivaas" class="nav-link" target="_blank" rel="noopener noreferrer">GitHub</a>
@@ -105,6 +106,7 @@
             <!-- Mobile menu -->
             <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 flex flex-col gap-4">
                 <a href="#features" class="nav-link mobile-nav-link">Features</a>
+                <a href="#benchmarks" class="nav-link mobile-nav-link">Benchmarks</a>
                 <a href="#packages" class="nav-link mobile-nav-link">Packages</a>
                 <a href="https://rivaas.dev/docs" class="nav-link mobile-nav-link" target="_blank" rel="noopener noreferrer">Docs</a>
                 <a href="https://github.com/rivaas-dev/rivaas" class="nav-link mobile-nav-link" target="_blank" rel="noopener noreferrer">GitHub</a>
@@ -261,6 +263,40 @@
                             Graceful shutdown, health checks, panic recovery, mTLS, and comprehensive middleware.
                         </p>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==============================
+         Benchmarks Section
+         ============================== -->
+    <section id="benchmarks" class="py-24 relative" aria-labelledby="benchmarks-heading">
+        <div class="container mx-auto px-6">
+            <div class="max-w-5xl mx-auto">
+                <h2 id="benchmarks-heading" class="section-heading font-display text-3xl md:text-4xl font-semibold text-white text-center mb-2 reveal">
+                    Proven Performance
+                    <a href="#benchmarks" class="anchor-link" aria-label="Link to Proven Performance section">#</a>
+                </h2>
+                <p class="text-slate-400 text-center mb-2 text-lg reveal">
+                    Fast routing with zero allocations.
+                </p>
+                <p class="text-slate-500 text-center mb-12 max-w-2xl mx-auto text-sm reveal">
+                    Independent benchmarks comparing rivaas/router against popular Go frameworks. All values are nanoseconds per operation (ns/op)—lower is better.
+                </p>
+                
+                <div id="benchmark-charts" class="space-y-12 reveal" role="region" aria-label="Benchmark comparison charts">
+                    <!-- Charts will be rendered here by JavaScript -->
+                </div>
+                
+                <div class="text-center mt-8 reveal">
+                    <p class="text-sm text-slate-500 mb-2">
+                        <span id="benchmark-meta">Loading benchmark data...</span>
+                    </p>
+                    <a href="https://rivaas.dev/docs/reference/packages/router/performance/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-rivaas-alpine hover:text-rivaas-alpine-light transition-colors font-medium text-sm">
+                        Full methodology and reproduction instructions
+                        <span aria-hidden="true">→</span>
+                    </a>
                 </div>
             </div>
         </div>

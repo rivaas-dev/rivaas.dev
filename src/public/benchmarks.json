@@ -1,0 +1,33 @@
+{
+  "updated": "2026-02-14",
+  "go_version": "1.25",
+  "goos": "linux",
+  "goarch": "amd64",
+  "cpu": "12th Gen Intel(R) Core(TM) i7-1265U",
+  "scenarios": [
+    {
+      "name": "Static",
+      "path": "/",
+      "results": [
+        { "framework": "Rivaas", "ns_op": 179.4, "b_op": 0, "allocs_op": 0 },
+        { "framework": "Gin", "ns_op": 259.1, "b_op": 0, "allocs_op": 0 },
+        { "framework": "Echo", "ns_op": 139.4, "b_op": 8, "allocs_op": 1 },
+        { "framework": "StdMux", "ns_op": 302.2, "b_op": 0, "allocs_op": 0 },
+        { "framework": "Chi", "ns_op": 1014, "b_op": 368, "allocs_op": 2 },
+        { "framework": "Hertz", "ns_op": 4722, "b_op": 3448, "allocs_op": 24 }
+      ]
+    },
+    {
+      "name": "OneParam",
+      "path": "/users/:id",
+      "results": [
+        { "framework": "Rivaas", "ns_op": 195.3, "b_op": 0, "allocs_op": 0 },
+        { "framework": "Gin", "ns_op": 284.4, "b_op": 0, "allocs_op": 0 },
+        { "framework": "Echo", "ns_op": 426.9, "b_op": 16, "allocs_op": 2 },
+        { "framework": "StdMux", "ns_op": 355.7, "b_op": 16, "allocs_op": 1 },
+        { "framework": "Chi", "ns_op": 2337, "b_op": 368, "allocs_op": 2 },
+        { "framework": "Hertz", "ns_op": 5614, "b_op": 3544, "allocs_op": 27 }
+      ]
+    }
+  ]
+}
