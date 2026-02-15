@@ -38,7 +38,7 @@ func main() {
         ),
     )
 
-    a.Start(context.Background(), ":8080")
+    a.Start(context.Background())
 }`
 }
 

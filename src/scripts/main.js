@@ -103,7 +103,7 @@ function typeTerminal() {
         { text: '<span style="color:#E67E80">func</span><span style="color:#7FBBB3"> main</span><span style="color:#D3C6AA">() {</span>', delay: 1600 },
         { text: '<span style="color:#D3C6AA">    a, _ </span><span style="color:#E67E80">:=</span><span style="color:#D3C6AA"> app.</span><span style="color:#7FBBB3">New</span><span style="color:#D3C6AA">()</span>', delay: 1700 },
         { text: '<span style="color:#D3C6AA">    a.</span><span style="color:#7FBBB3">GET</span><span style="color:#D3C6AA">(</span><span style="color:#A7C080">"/"</span><span style="color:#D3C6AA">, handler)</span>', delay: 1800 },
-        { text: '<span style="color:#D3C6AA">    a.</span><span style="color:#7FBBB3">Start</span><span style="color:#D3C6AA">(ctx, </span><span style="color:#A7C080">":8080"</span><span style="color:#D3C6AA">)</span>', delay: 1900 },
+        { text: '<span style="color:#D3C6AA">    a.</span><span style="color:#7FBBB3">Start</span><span style="color:#D3C6AA">(ctx)</span>', delay: 1900 },
         { text: '<span style="color:#D3C6AA">}</span>', delay: 2000 },
         { text: '', delay: 2200 },
         { text: '$ go run main.go', delay: 2400 },
