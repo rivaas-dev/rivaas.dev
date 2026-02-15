@@ -50,7 +50,7 @@ function updateSitemapPlugin() {
     writeBundle(options, bundle) {
       const today = new Date().toISOString().split('T')[0]
       const outDir = options.dir || 'dist'
-      const sitemapFiles = ['sitemap.xml', 'sitemap-main.xml']
+      const sitemapFiles = ['sitemap.xml']
 
       sitemapFiles.forEach(file => {
         const filePath = `${outDir}/${file}`
