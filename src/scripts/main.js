@@ -153,16 +153,41 @@ function setupReveal() {
     reveals.forEach(el => observer.observe(el));
 }
 
-// Fetch and render benchmarks
-async function renderBenchmarks() {
+// Update hero metrics from benchmark data (Rivaas Static scenario). Uses fallback values if no data.
+function updateHeroFromBenchmarks(data) {
+    if (!data?.scenarios?.length) return;
+    const staticScenario = data.scenarios.find(s => s.name === 'Static');
+    if (!staticScenario?.results?.length) return;
+    const rivaas = staticScenario.results.find(r => r.framework === 'Rivaas');
+    if (!rivaas) return;
+
+    const reqPerSec = Math.round(1e9 / rivaas.ns_op);
+    const nsOp = Math.round(rivaas.ns_op);
+    const bOp = Math.round(rivaas.b_op);
+
+    const counters = document.querySelectorAll('.metric-value');
+    if (counters.length >= 3) {
+        counters[0].dataset.target = String(reqPerSec);
+        counters[0].dataset.suffix = '+';
+        counters[1].dataset.target = String(nsOp);
+        counters[1].dataset.suffix = 'ns';
+        counters[2].dataset.target = String(bOp);
+        counters[2].dataset.suffix = 'B';
+    }
+}
+
+// Fetch and render benchmarks. If data is provided, uses it (avoids double fetch).
+async function renderBenchmarks(data) {
     const container = document.getElementById('benchmark-charts');
     const metaElement = document.getElementById('benchmark-meta');
     
     if (!container) return;
     
     try {
-        const response = await fetch('/benchmarks.json');
-        const data = await response.json();
+        if (!data) {
+            const response = await fetch('/benchmarks.json');
+            data = await response.json();
+        }
         
         // Update metadata
         if (metaElement) {
@@ -278,12 +303,22 @@ async function renderBenchmarks() {
 }
 
 // Initialize
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     setupMobileMenu();
     createParticles();
     setupReveal();
-    renderBenchmarks();
-    
+
+    let benchmarkData = null;
+    try {
+        const response = await fetch('/benchmarks.json');
+        benchmarkData = await response.json();
+        updateHeroFromBenchmarks(benchmarkData);
+    } catch (_) {
+        // Hero keeps fallback values from HTML (8.4M+, 119ns, 16B)
+    }
+
+    await renderBenchmarks(benchmarkData);
+
     // Trigger counter animation when metrics are visible (single observer pattern)
     const metricsSection = document.querySelector('.metric-value');
     if (metricsSection) {
