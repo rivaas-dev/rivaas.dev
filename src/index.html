@@ -36,12 +36,12 @@
     <link rel="preconnect" href="https://github.com" crossorigin>
     <link rel="dns-prefetch" href="https://github.com">
     
-    <!-- Noscript fallback for animated metrics -->
+    <!-- Noscript fallback for animated metrics (matches benchmarks.json Rivaas Static) -->
     <noscript>
         <style>
-            .metric-value[data-target="8400000"]::after { content: "8.4M+"; }
-            .metric-value[data-target="119"]::after { content: "119ns"; }
-            .metric-value[data-target="16"]::after { content: "16B"; }
+            .metric-value[data-target="15324548"]::after { content: "15.3M+"; }
+            .metric-value[data-target="65"]::after { content: "65ns"; }
+            .metric-value[data-target="0"]::after { content: "0B"; }
             .metric-value { font-size: 0; }
         </style>
     </noscript>
@@ -136,18 +136,18 @@
                     Modular. Observable. Cloud-native. Production-ready.
                 </p>
                 
-                <!-- Animated metrics -->
+                <!-- Animated metrics (fallbacks match benchmarks.json Rivaas Static; JS overwrites from /benchmarks.json) -->
                 <div class="grid grid-cols-3 gap-8 max-w-2xl mx-auto mb-12 reveal" style="animation-delay: 0.2s;">
                     <div class="text-center">
-                        <div class="metric-value text-4xl md:text-5xl" data-target="8400000" data-suffix="+">0</div>
+                        <div class="metric-value text-4xl md:text-5xl" data-target="15324548" data-suffix="+">0</div>
                         <div class="text-slate-500 text-sm mt-2">req/sec</div>
                     </div>
                     <div class="text-center">
-                        <div class="metric-value text-4xl md:text-5xl" data-target="119" data-suffix="ns">0</div>
+                        <div class="metric-value text-4xl md:text-5xl" data-target="65" data-suffix="ns">0</div>
                         <div class="text-slate-500 text-sm mt-2">latency</div>
                     </div>
                     <div class="text-center">
-                        <div class="metric-value text-4xl md:text-5xl" data-target="16" data-suffix="B">0</div>
+                        <div class="metric-value text-4xl md:text-5xl" data-target="0" data-suffix="B">0</div>
                         <div class="text-slate-500 text-sm mt-2">per request</div>
                     </div>
                 </div>

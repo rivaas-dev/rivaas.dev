@@ -314,7 +314,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         benchmarkData = await response.json();
         updateHeroFromBenchmarks(benchmarkData);
     } catch (_) {
-        // Hero keeps fallback values from HTML (8.4M+, 119ns, 16B)
+        // Hero keeps fallback values from HTML (15.3M+, 65ns, 0B — matches benchmarks.json Rivaas Static)
     }
 
     await renderBenchmarks(benchmarkData);
