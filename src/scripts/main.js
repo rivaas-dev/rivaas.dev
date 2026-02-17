@@ -316,7 +316,7 @@ async function renderBenchmarks(data) {
             scenarioDiv.appendChild(title);
             
             const pathLabel = document.createElement('p');
-            pathLabel.className = 'text-sm text-slate-500 mb-6 font-mono text-center';
+            pathLabel.className = 'text-sm text-rivaas-fog mb-6 font-mono text-center';
             pathLabel.textContent = `GET ${scenario.path} · ns/op`;
             scenarioDiv.appendChild(pathLabel);
             
@@ -403,7 +403,7 @@ async function renderBenchmarks(data) {
     } catch (error) {
         console.error('Failed to load benchmarks:', error);
         if (container) {
-            container.innerHTML = '<p class="text-slate-500 text-center">Failed to load benchmark data.</p>';
+            container.innerHTML = '<p class="text-rivaas-fog text-center">Failed to load benchmark data.</p>';
         }
         if (metaElement) {
             metaElement.textContent = '';

@@ -198,7 +198,14 @@
 }
 
 .comparison-before {
-  opacity: 0.6;
+  .terminal {
+    border-color: rgba($rivaas-fog, 0.15);
+    box-shadow: none;
+  }
+
+  .comparison-label {
+    color: $rivaas-fog;
+  }
 }
 
 .comparison-label {
@@ -206,7 +213,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: $rivaas-fog;
+  color: $rivaas-silver;
   margin-bottom: 0.5rem;
   display: flex;
   align-items: center;
@@ -511,7 +518,7 @@
   margin-top: 0.75rem;
   font-size: 0.85rem;
   font-weight: 600;
-  color: $rivaas-fog;
+  color: $rivaas-silver;
   text-align: center;
   word-break: break-word;
 }

@@ -10,7 +10,8 @@ $rivaas-frost: #F1F4F3;        // docs: $gray-100
 $rivaas-mist: #E4F0EC;         // docs: $gray-200
 $rivaas-ash: #D6DEDA;          // docs: $gray-300
 $rivaas-pebble: #B5C2BC;       // docs: $gray-400
-$rivaas-fog: #8A9A95;          // docs: $gray-500
+$rivaas-silver: #BCC8C3;       // secondary text (~8:1 on night, ~4.5:1 on basalt)
+$rivaas-fog: #95A8A2;          // docs: $gray-500 (bumped for ~6.5:1 on night, ~3.5:1 on basalt)
 $rivaas-stone: #5C6B66;        // docs: $gray-600
 $rivaas-basalt: #2E3B39;       // docs: $gray-700
 $rivaas-slate: #252F2C;        // docs: $gray-800
@@ -37,7 +38,7 @@ $rivaas-text-muted: #A3B1AB;   // docs: $dark-text-muted
 $rivaas-moss: #2D8A55;         // docs: $success
 $rivaas-glacier: #2563EB;      // docs: $info
 $rivaas-amber: #D97706;        // docs: $warning
-$rivaas-rust: #B33D28;         // docs: $danger
+$rivaas-rust: #D4553E;         // docs: $danger (brightened for ~5:1 on dark backgrounds)
 
 // Typography
 $font-display: 'Inter Variable', system-ui, sans-serif;
