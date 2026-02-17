@@ -89,6 +89,7 @@
                     <img src="/images/logo-white.svg" alt="Rivaas" class="h-8 w-auto">
                 </div>
                 <div class="hidden md:flex items-center gap-8">
+                    <a href="#demo" class="nav-link">Demo</a>
                     <a href="#features" class="nav-link">Features</a>
                     <a href="#benchmarks" class="nav-link">Benchmarks</a>
                     <a href="#packages" class="nav-link">Packages</a>
@@ -105,10 +106,11 @@
             </div>
             <!-- Mobile menu -->
             <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 flex flex-col gap-4">
+                <a href="#demo" class="nav-link mobile-nav-link">Demo</a>
                 <a href="#features" class="nav-link mobile-nav-link">Features</a>
                 <a href="#benchmarks" class="nav-link mobile-nav-link">Benchmarks</a>
                 <a href="#packages" class="nav-link mobile-nav-link">Packages</a>
-                <a href="https://rivaas.dev/docs" class="nav-link mobile-nav-link" target="_blank" rel="noopener noreferrer">Docs</a>
+                <a href="https://rivaas.dev/docs/" class="nav-link mobile-nav-link" target="_blank" rel="noopener noreferrer">Docs</a>
                 <a href="https://github.com/rivaas-dev/rivaas" class="nav-link mobile-nav-link" target="_blank" rel="noopener noreferrer">GitHub</a>
                 <a href="https://rivaas.dev/docs/getting-started" class="btn-primary text-sm text-center" target="_blank" rel="noopener noreferrer">Get Started</a>
             </div>
@@ -133,7 +135,7 @@
                 </h1>
                 
                 <p class="text-xl md:text-2xl text-slate-400 font-light mb-8 reveal" style="animation-delay: 0.1s;">
-                    Modular. Observable. Cloud-native. Production-ready.
+                    Write your handlers. Everything else is already done.
                 </p>
                 
                 <!-- Animated metrics (fallbacks match benchmarks.json Rivaas Static; JS overwrites from /benchmarks.json) -->
@@ -173,26 +175,32 @@
     </section>
 
     <!-- ==============================
-         Terminal Demo Section
+         Demo Section (asciinema)
          ============================== -->
-    <section class="py-24 relative section-glow">
+    <section id="demo" class="py-24 relative section-glow">
         <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto">
+            <div class="max-w-5xl mx-auto">
                 <h2 class="font-display text-3xl md:text-4xl font-semibold text-white text-center mb-4 reveal">
-                    Start in seconds
+                    See it in action
                 </h2>
-                <p class="text-slate-400 text-center mb-12 reveal">
-                    From zero to production-ready API in under a minute.
+                <p class="text-slate-400 text-center mb-8 reveal">
+                    From go get to a fully observable, documented API.
                 </p>
-                
+
+                <div class="demo-tabs reveal" role="tablist" aria-label="Demo steps">
+                    <button type="button" class="demo-tab active" data-cast="write" role="tab" aria-selected="true"><span class="demo-tab-step">1.</span> Write</button>
+                    <button type="button" class="demo-tab" data-cast="run" role="tab" aria-selected="false"><span class="demo-tab-step">2.</span> Run</button>
+                    <button type="button" class="demo-tab" data-cast="use" role="tab" aria-selected="false"><span class="demo-tab-step">3.</span> Use</button>
+                </div>
+
                 <div class="terminal reveal">
                     <div class="terminal-header">
                         <div class="terminal-dot bg-red-500"></div>
                         <div class="terminal-dot bg-yellow-500"></div>
                         <div class="terminal-dot bg-green-500"></div>
-                        <span class="text-slate-500 text-sm ml-4 font-mono">~/my-api</span>
+                        <span id="demo-terminal-label" class="text-slate-500 text-sm ml-4 font-mono">~/my-api — main.go</span>
                     </div>
-                    <div class="terminal-body" id="terminal-content"><!-- Content injected by JS --></div>
+                    <div id="asciinema-container" class="asciinema-container"></div>
                 </div>
                 <noscript>
                     <p class="text-slate-400 text-center p-4">Enable JavaScript to view the interactive demo.</p>
@@ -202,71 +210,136 @@
     </section>
 
     <!-- ==============================
-         Features Section
+         What You Get For Free (comparison)
          ============================== -->
     <section id="features" class="py-24 relative section-glow">
         <div class="container mx-auto px-6">
             <div class="max-w-5xl mx-auto">
                 <h2 class="section-heading font-display text-3xl md:text-4xl font-semibold text-white text-center mb-4 reveal">
-                    Built for production
-                    <a href="#features" class="anchor-link" aria-label="Link to Built for production section">#</a>
+                    What you get for free
+                    <a href="#features" class="anchor-link" aria-label="Link to What you get for free section">#</a>
                 </h2>
-                <p class="text-slate-400 text-center mb-16 max-w-2xl mx-auto reveal">
-                    Everything you need to build, deploy, and operate web services at scale.
+                <p class="text-slate-400 text-center mb-10 reveal">
+                    Three lines replace thirty.
                 </p>
-                
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div class="package-card reveal">
-                        <div class="text-rivaas-alpine-light mb-3">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                            </svg>
+
+                <div class="comparison-tabs reveal" role="tablist" aria-label="Comparison categories">
+                    <button type="button" class="comparison-tab active" data-tab="observability" role="tab" aria-selected="true">Observability</button>
+                    <button type="button" class="comparison-tab" data-tab="apidocs" role="tab" aria-selected="false">API Docs</button>
+                    <button type="button" class="comparison-tab" data-tab="health" role="tab" aria-selected="false">Health + Reload</button>
+                    <button type="button" class="comparison-tab" data-tab="binding" role="tab" aria-selected="false">Binding</button>
+                    <button type="button" class="comparison-tab" data-tab="errors" role="tab" aria-selected="false">Errors</button>
+                    <button type="button" class="comparison-tab" data-tab="middleware" role="tab" aria-selected="false">Middleware</button>
+                </div>
+
+                <div class="comparison-panels">
+                    <div class="comparison-panel active" data-panel="observability" role="tabpanel">
+                        <div class="comparison-grid">
+                            <div class="comparison-side comparison-before">
+                                <div class="comparison-label">Others</div>
+                                <div class="terminal">
+                                    <div class="terminal-body text-sm overflow-x-auto"><!-- SHIKI:beforeObservability --></div>
+                                </div>
+                            </div>
+                            <div class="comparison-side comparison-after">
+                                <div class="comparison-label">Rivaas</div>
+                                <div class="terminal">
+                                    <div class="terminal-body text-sm overflow-x-auto"><!-- SHIKI:afterObservability --></div>
+                                </div>
+                            </div>
                         </div>
-                        <h3 class="font-display text-xl font-semibold text-white mb-2">Blazing Fast</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed">
-                            Radix tree router with Bloom filter optimization. See our <a href="https://rivaas.dev/docs/reference/packages/router/performance/" class="text-rivaas-alpine hover:underline" target="_blank" rel="noopener noreferrer">Performance</a> page for the latest benchmark numbers.
-                        </p>
+                        <p class="comparison-summary">Full OpenTelemetry stack — metrics, traces, and structured logs — configured in one block.</p>
                     </div>
-                    
-                    <div class="package-card reveal">
-                        <div class="text-rivaas-moss mb-3">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                            </svg>
+                    <div class="comparison-panel" data-panel="apidocs" role="tabpanel" hidden>
+                        <div class="comparison-grid">
+                            <div class="comparison-side comparison-before">
+                                <div class="comparison-label">Others</div>
+                                <div class="terminal">
+                                    <div class="terminal-body text-sm overflow-x-auto"><!-- SHIKI:beforeApiDocs --></div>
+                                </div>
+                            </div>
+                            <div class="comparison-side comparison-after">
+                                <div class="comparison-label">Rivaas</div>
+                                <div class="terminal">
+                                    <div class="terminal-body text-sm overflow-x-auto"><!-- SHIKI:afterApiDocs --></div>
+                                </div>
+                            </div>
                         </div>
-                        <h3 class="font-display text-xl font-semibold text-white mb-2">Integrated Observability</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed">
-                            OpenTelemetry-native with built-in metrics, tracing, and structured logging. No assembly required.
-                        </p>
+                        <p class="comparison-summary">Route-level OpenAPI docs — no magic comments, no codegen step, full IDE support.</p>
                     </div>
-                    
-                    <div class="package-card reveal">
-                        <div class="text-rivaas-alpine mb-3">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                            </svg>
+                    <div class="comparison-panel" data-panel="health" role="tabpanel" hidden>
+                        <div class="comparison-grid">
+                            <div class="comparison-side comparison-before">
+                                <div class="comparison-label">Others</div>
+                                <div class="terminal">
+                                    <div class="terminal-body text-sm overflow-x-auto"><!-- SHIKI:beforeHealth --></div>
+                                </div>
+                            </div>
+                            <div class="comparison-side comparison-after">
+                                <div class="comparison-label">Rivaas</div>
+                                <div class="terminal">
+                                    <div class="terminal-body text-sm overflow-x-auto"><!-- SHIKI:afterHealth --></div>
+                                </div>
+                            </div>
                         </div>
-                        <h3 class="font-display text-xl font-semibold text-white mb-2">Automatic OpenAPI</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed">
-                            Generate OpenAPI 3.0/3.1 specs from your code. Built-in Swagger UI with zero configuration.
-                        </p>
+                        <p class="comparison-summary">Kubernetes-ready liveness and readiness probes, plus SIGHUP config reload — built in.</p>
                     </div>
-                    
-                    <div class="package-card reveal">
-                        <div class="text-rivaas-glacier mb-3">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-                            </svg>
+                    <div class="comparison-panel" data-panel="binding" role="tabpanel" hidden>
+                        <div class="comparison-grid">
+                            <div class="comparison-side comparison-before">
+                                <div class="comparison-label">Others</div>
+                                <div class="terminal">
+                                    <div class="terminal-body text-sm overflow-x-auto"><!-- SHIKI:beforeBinding --></div>
+                                </div>
+                            </div>
+                            <div class="comparison-side comparison-after">
+                                <div class="comparison-label">Rivaas</div>
+                                <div class="terminal">
+                                    <div class="terminal-body text-sm overflow-x-auto"><!-- SHIKI:afterBinding --></div>
+                                </div>
+                            </div>
                         </div>
-                        <h3 class="font-display text-xl font-semibold text-white mb-2">Production Ready</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed">
-                            Graceful shutdown, health checks, panic recovery, mTLS, and comprehensive middleware.
-                        </p>
+                        <p class="comparison-summary">One generic call binds path, query, headers, and body — then validates everything.</p>
+                    </div>
+                    <div class="comparison-panel" data-panel="errors" role="tabpanel" hidden>
+                        <div class="comparison-grid">
+                            <div class="comparison-side comparison-before">
+                                <div class="comparison-label">Others</div>
+                                <div class="terminal">
+                                    <div class="terminal-body text-sm overflow-x-auto"><!-- SHIKI:beforeErrors --></div>
+                                </div>
+                            </div>
+                            <div class="comparison-side comparison-after">
+                                <div class="comparison-label">Rivaas</div>
+                                <div class="terminal">
+                                    <div class="terminal-body text-sm overflow-x-auto"><!-- SHIKI:afterErrors --></div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="comparison-summary">RFC 9457 problem details from a single option — every error gets consistent, spec-compliant formatting.</p>
+                    </div>
+                    <div class="comparison-panel" data-panel="middleware" role="tabpanel" hidden>
+                        <div class="comparison-grid">
+                            <div class="comparison-side comparison-before">
+                                <div class="comparison-label">Others</div>
+                                <div class="terminal">
+                                    <div class="terminal-body text-sm overflow-x-auto"><!-- SHIKI:beforeMiddleware --></div>
+                                </div>
+                            </div>
+                            <div class="comparison-side comparison-after">
+                                <div class="comparison-label">Rivaas</div>
+                                <div class="terminal">
+                                    <div class="terminal-body text-sm overflow-x-auto"><!-- SHIKI:afterMiddleware --></div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="comparison-summary">Production middleware — CORS, compression, rate limiting, recovery — one import path, functional options.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
 
     <!-- ==============================
          Benchmarks Section
@@ -303,87 +376,71 @@
     </section>
 
     <!-- ==============================
-         Code Example Section
-         ============================== -->
-    <section class="py-24 relative">
-        <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto">
-                <h2 class="font-display text-3xl md:text-4xl font-semibold text-white text-center mb-4 reveal">
-                    Everything you need, nothing you don't
-                </h2>
-                <p class="text-slate-400 text-center mb-12 reveal">
-                    Functional options everywhere. Configure observability, OpenAPI, health checks, and more—all the same way.
-                </p>
-                
-                <div class="terminal reveal">
-                    <div class="terminal-header">
-                        <div class="terminal-dot bg-red-500"></div>
-                        <div class="terminal-dot bg-yellow-500"></div>
-                        <div class="terminal-dot bg-green-500"></div>
-                        <span class="text-slate-500 text-sm ml-4 font-mono">main.go</span>
-                    </div>
-                    <!-- Code block rendered at build time by Shiki syntax highlighter (see vite.config.js) -->
-                    <div class="terminal-body text-sm"><!-- SHIKI:mainConfig --></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ==============================
-         Packages Section
+         Use What You Need (code + packages)
          ============================== -->
     <section id="packages" class="py-24 relative section-glow">
         <div class="container mx-auto px-6">
             <div class="max-w-5xl mx-auto">
                 <h2 class="section-heading font-display text-3xl md:text-4xl font-semibold text-white text-center mb-4 reveal">
-                    Modular packages
-                    <a href="#packages" class="anchor-link" aria-label="Link to Modular packages section">#</a>
+                    Use what you need
+                    <a href="#packages" class="anchor-link" aria-label="Link to Use what you need section">#</a>
                 </h2>
-                <p class="text-slate-400 text-center mb-16 reveal">
-                    <strong class="text-white font-semibold">Truly modular.</strong> Use what you need. Each package works standalone—no framework lock-in.
+                <p class="text-slate-400 text-center mb-8 reveal">
+                    Full framework or standalone packages. Same functional options, no lock-in.
                 </p>
-                
+
+                <div class="terminal reveal mb-10">
+                    <div class="terminal-header">
+                        <div class="terminal-dot bg-red-500"></div>
+                        <div class="terminal-dot bg-yellow-500"></div>
+                        <div class="terminal-dot bg-green-500"></div>
+                        <span class="text-slate-500 text-sm ml-4 font-mono">standalone.go</span>
+                    </div>
+                    <div class="terminal-body text-sm"><!-- SHIKI:mainConfig --></div>
+                </div>
+
                 <div class="grid md:grid-cols-3 gap-4">
                     <a href="https://rivaas.dev/docs/guides/app" class="package-card reveal group" target="_blank" rel="noopener noreferrer">
                         <code class="text-rivaas-alpine-light font-mono text-lg font-medium">app</code>
-                        <p class="text-slate-400 text-sm mt-2">Batteries-included web framework</p>
+                        <p class="text-slate-400 text-sm mt-2">Batteries-included web framework.</p>
                     </a>
                     <a href="https://rivaas.dev/docs/guides/router" class="package-card reveal group" target="_blank" rel="noopener noreferrer">
                         <code class="text-rivaas-alpine-light font-mono text-lg font-medium">router</code>
-                        <p class="text-slate-400 text-sm mt-2">High-performance HTTP router</p>
+                        <p class="text-slate-400 text-sm mt-2">High-performance HTTP router.</p>
                     </a>
                     <a href="https://rivaas.dev/docs/guides/binding" class="package-card reveal group" target="_blank" rel="noopener noreferrer">
                         <code class="text-rivaas-alpine-light font-mono text-lg font-medium">binding</code>
-                        <p class="text-slate-400 text-sm mt-2">Request binding (JSON, form, query)</p>
+                        <p class="text-slate-400 text-sm mt-2">Request binding (JSON, form, query).</p>
                     </a>
                     <a href="https://rivaas.dev/docs/guides/validation" class="package-card reveal group" target="_blank" rel="noopener noreferrer">
                         <code class="text-rivaas-alpine-light font-mono text-lg font-medium">validation</code>
-                        <p class="text-slate-400 text-sm mt-2">Struct validation with JSON Schema</p>
+                        <p class="text-slate-400 text-sm mt-2">Struct validation with JSON Schema.</p>
                     </a>
                     <a href="https://rivaas.dev/docs/guides/config" class="package-card reveal group" target="_blank" rel="noopener noreferrer">
                         <code class="text-rivaas-alpine-light font-mono text-lg font-medium">config</code>
-                        <p class="text-slate-400 text-sm mt-2">Configuration management with validation</p>
+                        <p class="text-slate-400 text-sm mt-2">Configuration with validation.</p>
                     </a>
                     <a href="https://rivaas.dev/docs/guides/logging" class="package-card reveal group" target="_blank" rel="noopener noreferrer">
                         <code class="text-rivaas-alpine-light font-mono text-lg font-medium">logging</code>
-                        <p class="text-slate-400 text-sm mt-2">Structured logging with slog</p>
+                        <p class="text-slate-400 text-sm mt-2">Structured logging with slog.</p>
                     </a>
                     <a href="https://rivaas.dev/docs/guides/metrics" class="package-card reveal group" target="_blank" rel="noopener noreferrer">
                         <code class="text-rivaas-alpine-light font-mono text-lg font-medium">metrics</code>
-                        <p class="text-slate-400 text-sm mt-2">OpenTelemetry metrics</p>
+                        <p class="text-slate-400 text-sm mt-2">OpenTelemetry metrics.</p>
                     </a>
                     <a href="https://rivaas.dev/docs/guides/tracing" class="package-card reveal group" target="_blank" rel="noopener noreferrer">
                         <code class="text-rivaas-alpine-light font-mono text-lg font-medium">tracing</code>
-                        <p class="text-slate-400 text-sm mt-2">Distributed tracing with OTLP</p>
+                        <p class="text-slate-400 text-sm mt-2">Distributed tracing with OTLP.</p>
                     </a>
                     <a href="https://rivaas.dev/docs/guides/openapi" class="package-card reveal group" target="_blank" rel="noopener noreferrer">
                         <code class="text-rivaas-alpine-light font-mono text-lg font-medium">openapi</code>
-                        <p class="text-slate-400 text-sm mt-2">Automatic OpenAPI 3.0/3.1 generation</p>
+                        <p class="text-slate-400 text-sm mt-2">Automatic OpenAPI 3.0/3.1.</p>
                     </a>
                 </div>
             </div>
         </div>
     </section>
+
 
     <!-- ==============================
          Philosophy Section

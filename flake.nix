@@ -20,6 +20,10 @@
           buildInputs = with pkgs; [
             gum
             nodejs_24
+            asciinema
+            bat
+            jq
+            expect
           ];
 
           shellHook = ''

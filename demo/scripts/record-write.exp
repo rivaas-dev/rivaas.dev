@@ -1,0 +1,19 @@
+#!/usr/bin/env expect
+# Run from demo/: expect scripts/record-write.exp
+# Records write.cast: bat main.go with syntax highlighting.
+
+set timeout 60
+set cast_path "../src/public/casts/write.cast"
+
+spawn asciinema rec --overwrite --cols 100 --rows 40 $cast_path
+
+# Wait for shell prompt
+sleep 1
+send "bat --style=plain --color=always --paging=never main.go"
+sleep 1
+send "\r"
+sleep 3
+send "exit\r"
+sleep 2
+send "\r"
+expect eof

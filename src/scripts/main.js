@@ -2,6 +2,10 @@
 import '@fontsource-variable/inter/wght.css';
 import '@fontsource-variable/jetbrains-mono/wght.css';
 
+// Asciinema player for demo section
+import { create as createAsciinemaPlayer } from 'asciinema-player';
+import 'asciinema-player/dist/bundle/asciinema-player.css';
+
 // Styles
 import '../styles/tailwind.css';
 import '../styles/main.scss';
@@ -82,57 +86,156 @@ function animateCounters() {
     });
 }
 
-// Terminal typing animation
-let terminalAnimationStarted = false;
+// Asciinema demo: autoplay on scroll, auto-advance between tabs
+const CASTS = ['write', 'run', 'use'];
+const CAST_LABELS = {
+    write: '~/my-api — main.go',
+    run: '~/my-api',
+    use: '~/my-api — endpoints',
+};
 
-function typeTerminal() {
-    // Prevent multiple runs
-    if (terminalAnimationStarted) {
-        return;
+function setupAsciinemaDemo() {
+    const container = document.getElementById('asciinema-container');
+    const tabButtons = document.querySelectorAll('.demo-tab');
+    const terminalLabel = document.getElementById('demo-terminal-label');
+    if (!container || !tabButtons.length) return;
+
+    let currentPlayer = null;
+    let currentCast = 'write';
+
+    function activateTab(castName) {
+        tabButtons.forEach((b) => {
+            const isActive = b.getAttribute('data-cast') === castName;
+            b.classList.toggle('active', isActive);
+            b.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+        if (terminalLabel) {
+            terminalLabel.textContent = CAST_LABELS[castName] || '~/my-api';
+        }
     }
-    terminalAnimationStarted = true;
-    
-    const lines = [
-        { text: '$ go get rivaas.dev/app', delay: 0 },
-        { text: '$ cat main.go', delay: 800 },
-        { text: '', delay: 1000 },
-        { text: '<span style="color:#E67E80">package</span><span style="color:#DBBC7F"> main</span>', delay: 1200 },
-        { text: '', delay: 1300 },
-        { text: '<span style="color:#E67E80">import</span><span style="color:#A7C080"> "</span><span style="color:#DBBC7F">rivaas.dev/app</span><span style="color:#A7C080">"</span>', delay: 1400 },
-        { text: '', delay: 1500 },
-        { text: '<span style="color:#E67E80">func</span><span style="color:#7FBBB3"> main</span><span style="color:#D3C6AA">() {</span>', delay: 1600 },
-        { text: '<span style="color:#D3C6AA">    a, _ </span><span style="color:#E67E80">:=</span><span style="color:#D3C6AA"> app.</span><span style="color:#7FBBB3">New</span><span style="color:#D3C6AA">()</span>', delay: 1700 },
-        { text: '<span style="color:#D3C6AA">    a.</span><span style="color:#7FBBB3">GET</span><span style="color:#D3C6AA">(</span><span style="color:#A7C080">"/"</span><span style="color:#D3C6AA">, handler)</span>', delay: 1800 },
-        { text: '<span style="color:#D3C6AA">    a.</span><span style="color:#7FBBB3">Start</span><span style="color:#D3C6AA">(ctx)</span>', delay: 1900 },
-        { text: '<span style="color:#D3C6AA">}</span>', delay: 2000 },
-        { text: '', delay: 2200 },
-        { text: '$ go run main.go', delay: 2400 },
-        { text: '<span style="color:#A7C080">🚀 Rivaas listening on :8080</span>', delay: 2800 },
-    ];
-    
-    const container = document.getElementById('terminal-content');
-    if (!container) return;
-    
-    // Clear any existing content
-    container.innerHTML = '';
-    
-    lines.forEach((line, i) => {
-        setTimeout(() => {
-            const div = document.createElement('div');
-            div.className = 'terminal-line';
-            div.style.animationDelay = '0s';
-            div.innerHTML = line.text || '&nbsp;';
-            container.appendChild(div);
-            
-            // Add cursor to last line
-            if (i === lines.length - 1) {
-                setTimeout(() => {
-                    const cursor = document.createElement('span');
-                    cursor.className = 'cursor';
-                    div.appendChild(cursor);
-                }, 300);
-            }
-        }, line.delay);
+
+    function advanceToNext() {
+        const idx = CASTS.indexOf(currentCast);
+        if (idx < CASTS.length - 1) {
+            const next = CASTS[idx + 1];
+            activateTab(next);
+            loadCast(next);
+        }
+    }
+
+    function loadCast(castName) {
+        if (currentPlayer && typeof currentPlayer.dispose === 'function') {
+            currentPlayer.dispose();
+            currentPlayer = null;
+        }
+        container.innerHTML = '';
+        const castUrl = `/casts/${castName}.cast`;
+        const rows = 40;
+        currentPlayer = createAsciinemaPlayer(castUrl, container, {
+            autoPlay: true,
+            loop: false,
+            speed: 1.5,
+            idleTimeLimit: 3,
+            cols: 100,
+            rows,
+            theme: 'auto/rivaas',
+            poster: 'npt:0:01',
+            fit: 'width',
+            terminalLineHeight: 1.333,
+        });
+        currentCast = castName;
+
+        currentPlayer.addEventListener('ended', () => {
+            setTimeout(advanceToNext, 800);
+        });
+    }
+
+    tabButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+            const cast = btn.getAttribute('data-cast');
+            if (!cast || cast === currentCast) return;
+            activateTab(cast);
+            loadCast(cast);
+        });
+    });
+
+    const demoSection = document.getElementById('demo');
+    if (demoSection) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    loadCast(currentCast);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+        observer.observe(demoSection);
+    } else {
+        loadCast('write');
+    }
+}
+
+// Comparison section: tab switching + line count badges
+function setupComparisonTabs() {
+    const tabs = document.querySelectorAll('.comparison-tab');
+    const panels = document.querySelectorAll('.comparison-panel');
+    if (!tabs.length || !panels.length) return;
+
+    tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+            const tabId = tab.getAttribute('data-tab');
+            if (!tabId) return;
+            tabs.forEach((t) => {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+            });
+            tab.classList.add('active');
+            tab.setAttribute('aria-selected', 'true');
+            panels.forEach((panel) => {
+                const isActive = panel.getAttribute('data-panel') === tabId;
+                panel.classList.toggle('active', isActive);
+                panel.hidden = !isActive;
+            });
+        });
+    });
+
+    injectLineCountBadges();
+}
+
+function injectLineCountBadges() {
+    const panels = document.querySelectorAll('.comparison-panel');
+    panels.forEach((panel) => {
+        const sides = panel.querySelectorAll('.comparison-side');
+        if (sides.length < 2) return;
+
+        const beforeCode = sides[0].querySelector('.shiki code, .terminal-body');
+        const afterCode = sides[1].querySelector('.shiki code, .terminal-body');
+        if (!beforeCode || !afterCode) return;
+
+        const countLines = (el) => {
+            const text = el.textContent.trim();
+            return text.split('\n').filter(line => line.trim().length > 0).length;
+        };
+
+        const beforeLines = countLines(beforeCode);
+        const afterLines = countLines(afterCode);
+        if (beforeLines <= 0 || afterLines <= 0) return;
+
+        const label = sides[0].querySelector('.comparison-label');
+        if (label && !label.querySelector('.line-count')) {
+            const badge = document.createElement('span');
+            badge.className = 'line-count';
+            badge.textContent = `${beforeLines} lines`;
+            label.appendChild(badge);
+        }
+
+        const afterLabel = sides[1].querySelector('.comparison-label');
+        if (afterLabel && !afterLabel.querySelector('.line-count')) {
+            const badge = document.createElement('span');
+            badge.className = 'line-count line-count-after';
+            badge.textContent = `${afterLines} lines`;
+            afterLabel.appendChild(badge);
+        }
     });
 }
 
@@ -227,6 +330,9 @@ async function renderBenchmarks(data) {
             sortedResults.forEach(result => {
                 const barGroup = document.createElement('div');
                 barGroup.className = 'benchmark-bar-group';
+                barGroup.setAttribute('role', 'img');
+                const allocText = result.allocs_op === 1 ? 'allocation' : 'allocations';
+                barGroup.setAttribute('aria-label', `${result.framework}: ${result.ns_op.toFixed(1)} nanoseconds per operation, ${result.allocs_op} ${allocText}`);
                 if (result.framework === 'Rivaas') {
                     barGroup.classList.add('benchmark-highlight');
                 }
@@ -263,8 +369,8 @@ async function renderBenchmarks(data) {
                     badge.classList.add('badge-zero');
                     badge.textContent = '0 alloc';
                 } else {
-                    const allocText = result.allocs_op === 1 ? 'alloc' : 'allocs';
-                    badge.textContent = `${result.allocs_op.toFixed(0)} ${allocText}`;
+                    const badgeAllocText = result.allocs_op === 1 ? 'alloc' : 'allocs';
+                    badge.textContent = `${result.allocs_op.toFixed(0)} ${badgeAllocText}`;
                 }
                 barGroup.appendChild(badge);
                 
@@ -299,6 +405,9 @@ async function renderBenchmarks(data) {
         if (container) {
             container.innerHTML = '<p class="text-slate-500 text-center">Failed to load benchmark data.</p>';
         }
+        if (metaElement) {
+            metaElement.textContent = '';
+        }
     }
 }
 
@@ -307,6 +416,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     setupMobileMenu();
     createParticles();
     setupReveal();
+    setupComparisonTabs();
 
     let benchmarkData = null;
     try {
@@ -334,18 +444,5 @@ document.addEventListener('DOMContentLoaded', async () => {
         metricsObserver.observe(metricsSection.parentElement.parentElement);
     }
     
-    // Start terminal animation when visible (simplified pattern)
-    const terminal = document.getElementById('terminal-content');
-    if (terminal) {
-        const terminalObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    typeTerminal();
-                    terminalObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.3 });
-        
-        terminalObserver.observe(terminal);
-    }
+    setupAsciinemaDemo();
 });

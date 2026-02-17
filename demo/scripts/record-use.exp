@@ -1,0 +1,22 @@
+#!/usr/bin/env expect
+# Run from demo/ with server already running, or use record-use.sh.
+# Records use.cast: curl openapi + jq, curl metrics.
+
+set timeout 60
+set cast_path "../src/public/casts/use.cast"
+
+spawn asciinema rec --overwrite --cols 100 --rows 40 $cast_path
+
+sleep 1
+send "curl -s http://localhost:8080/openapi.json | jq -C"
+sleep 1
+send "\r"
+sleep 3
+send "curl -s http://localhost:9090/metrics | head -5"
+sleep 1
+send "\r"
+sleep 5
+send "exit\r"
+sleep 2
+send "\r"
+expect eof

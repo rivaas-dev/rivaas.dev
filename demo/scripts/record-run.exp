@@ -1,0 +1,20 @@
+#!/usr/bin/env expect
+# Run from demo/: expect scripts/record-run.exp
+# Records run.cast: go run main.go, wait for banner, Ctrl+C, exit.
+
+set timeout 60
+set cast_path "../src/public/casts/run.cast"
+
+spawn asciinema rec --overwrite --cols 100 --rows 40 $cast_path
+
+sleep 1
+send "go run main.go"
+sleep 1
+send "\r"
+sleep 8
+send "\003"
+sleep 0.5
+send "exit\r"
+sleep 2
+send "\r"
+expect eof

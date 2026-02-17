@@ -39,6 +39,199 @@
   line-height: 1.55;
 }
 
+// Demo section: asciinema tabs
+.demo-tabs {
+  display: flex;
+  gap: 0;
+  justify-content: center;
+  margin-bottom: 1rem;
+
+  .demo-tab {
+    padding: 0.5rem 1.25rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: $rivaas-fog;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: color $transition-fast, border-color $transition-fast;
+
+    &:hover {
+      color: $rivaas-text;
+    }
+
+    &.active {
+      color: $rivaas-alpine-light;
+      border-bottom-color: $rivaas-alpine;
+    }
+
+    .demo-tab-step {
+      font-weight: 600;
+      opacity: 0.5;
+      margin-right: 0.15em;
+    }
+  }
+}
+
+.asciinema-container {
+  padding: 0;
+  min-height: 200px;
+
+  .asciinema-player-wrapper {
+    border-radius: 0 0 12px 12px;
+  }
+
+  .asciinema-terminal {
+    font-family: $font-mono !important;
+  }
+}
+
+// Asciinema player: Rivaas theme (dark, alpine accents)
+.asciinema-player-theme-rivaas {
+  --term-color-foreground: #{$rivaas-text};
+  --term-color-background: #{$rivaas-slate};
+
+  --term-color-0: #{$rivaas-dark};
+  --term-color-1: #{$rivaas-rust};
+  --term-color-2: #{$rivaas-moss};
+  --term-color-3: #{$rivaas-amber};
+  --term-color-4: #{$rivaas-glacier};
+  --term-color-5: #{$rivaas-alpine};
+  --term-color-6: #{$rivaas-alpine-light};
+  --term-color-7: #{$rivaas-text};
+}
+
+// Comparison section: before/after tabs
+.comparison-tabs {
+  display: flex;
+  gap: 0;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .comparison-tab {
+    padding: 0.5rem 1.25rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: $rivaas-fog;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: color $transition-fast, border-color $transition-fast;
+    white-space: nowrap;
+    flex-shrink: 0;
+
+    &:hover {
+      color: $rivaas-text;
+    }
+
+    &.active {
+      color: $rivaas-alpine-light;
+      border-bottom-color: $rivaas-alpine;
+    }
+  }
+}
+
+.comparison-panels {
+  position: relative;
+}
+
+.comparison-panel {
+  display: none;
+  animation: panelFadeIn 0.3s ease;
+
+  &.active {
+    display: block;
+  }
+
+  &[hidden] {
+    display: none !important;
+  }
+}
+
+@keyframes panelFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.comparison-summary {
+  text-align: center;
+  color: $rivaas-fog;
+  font-size: 0.875rem;
+  font-style: italic;
+  margin-top: 1rem;
+  line-height: 1.5;
+}
+
+.comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.comparison-side {
+  min-width: 0;
+
+  .terminal {
+    min-height: 120px;
+    overflow: hidden;
+  }
+}
+
+.comparison-before {
+  opacity: 0.6;
+}
+
+.comparison-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: $rivaas-fog;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.line-count {
+  font-size: 0.65rem;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
+  background: rgba($rivaas-slate, 0.8);
+  color: $rivaas-fog;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  &.line-count-after {
+    background: rgba($rivaas-alpine, 0.15);
+    color: $rivaas-alpine-light;
+    border-color: rgba($rivaas-alpine, 0.3);
+  }
+}
+
+
 // Metrics
 .metric-value {
   font-family: $font-mono;
@@ -224,9 +417,6 @@
   }
 }
 
-.benchmark-scenario {
-  // Each scenario is now a column chart
-}
 
 .benchmark-bars-container {
   display: flex;
@@ -317,11 +507,6 @@
   }
 }
 
-// Old vertical badge styles - no longer used
-.benchmark-badge-vertical {
-  display: none;
-}
-
 .benchmark-bar-label {
   margin-top: 0.75rem;
   font-size: 0.85rem;
@@ -329,17 +514,6 @@
   color: $rivaas-fog;
   text-align: center;
   word-break: break-word;
-}
-
-// Remove old horizontal styles but keep for reference/fallback
-.benchmark-row,
-.benchmark-label,
-.benchmark-bar-container,
-.benchmark-bar,
-.benchmark-value,
-.benchmark-badge {
-  // Old horizontal styles - can be removed if vertical works well
-  display: none;
 }
 
 // Responsive adjustments for vertical benchmarks
