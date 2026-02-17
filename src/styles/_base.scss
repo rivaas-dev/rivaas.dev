@@ -20,5 +20,7 @@ section:not(.hero-bg) {
 }
 
 section.section-glow {
-  background: linear-gradient(180deg, $rivaas-night 0%, $rivaas-surface 50%, $rivaas-night 100%);
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 40%, rgba($rivaas-alpine, 0.04) 0%, transparent 70%),
+    linear-gradient(180deg, $rivaas-night 0%, $rivaas-surface 40%, $rivaas-surface 60%, $rivaas-night 100%);
 }
