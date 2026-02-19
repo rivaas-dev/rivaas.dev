@@ -1,9 +1,9 @@
 {
-  "updated": "2026-02-15",
+  "updated": "2026-02-19",
   "go_version": "1.25",
   "goos": "linux",
   "goarch": "amd64",
-  "cpu": "AMD EPYC 9V74 80-Core Processor",
+  "cpu": "AMD EPYC 7763 64-Core Processor",
   "scenarios": [
     {
       "name": "Static",
@@ -13,37 +13,37 @@
           "allocs_op": 0,
           "b_op": 0,
           "framework": "Rivaas",
-          "ns_op": 65.26
+          "ns_op": 65.34
         },
         {
           "allocs_op": 0,
           "b_op": 0,
           "framework": "StdMux",
-          "ns_op": 76.17
+          "ns_op": 82.85
         },
         {
           "allocs_op": 0,
           "b_op": 0,
           "framework": "Gin",
-          "ns_op": 66.11
+          "ns_op": 61.62
         },
         {
           "allocs_op": 1,
           "b_op": 8,
           "framework": "Echo",
-          "ns_op": 76.62
+          "ns_op": 80.11
         },
         {
           "allocs_op": 2,
           "b_op": 368,
           "framework": "Chi",
-          "ns_op": 282.3
+          "ns_op": 284
         },
         {
           "allocs_op": 24,
           "b_op": 3448,
           "framework": "Hertz",
-          "ns_op": 1689
+          "ns_op": 1738
         }
       ]
     },
@@ -55,37 +55,37 @@
           "allocs_op": 0,
           "b_op": 0,
           "framework": "Rivaas",
-          "ns_op": 126.4
+          "ns_op": 141
         },
         {
           "allocs_op": 1,
           "b_op": 16,
           "framework": "StdMux",
-          "ns_op": 223.8
+          "ns_op": 240
         },
         {
           "allocs_op": 0,
           "b_op": 0,
           "framework": "Gin",
-          "ns_op": 120.5
+          "ns_op": 96.52
         },
         {
           "allocs_op": 2,
           "b_op": 16,
           "framework": "Echo",
-          "ns_op": 133
+          "ns_op": 140.9
         },
         {
           "allocs_op": 2,
           "b_op": 368,
           "framework": "Chi",
-          "ns_op": 365
+          "ns_op": 368.1
         },
         {
           "allocs_op": 27,
           "b_op": 3544,
           "framework": "Hertz",
-          "ns_op": 2011
+          "ns_op": 2070
         }
       ]
     }
