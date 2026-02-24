@@ -208,9 +208,10 @@ r.Use(rateLimiterMiddleware)
 r.Use(requestIDMiddleware)
 r.Use(panicRecoveryMiddleware)`,
 
-  afterMiddleware: `// Rivaas: built-in, same import path
+  afterMiddleware: `// Rivaas: each middleware is its own module
+// go get rivaas.dev/router/middleware/cors
 app.WithMiddleware(
-    cors.New(cors.WithOrigins("*")),
+    cors.New(cors.WithAllowedOrigins("*")),
     compression.New(),
     ratelimit.New(ratelimit.WithRate(100)),
     requestid.New(),
