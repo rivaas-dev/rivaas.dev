@@ -1,5 +1,5 @@
 {
-  "updated": "2026-02-21",
+  "updated": "2026-02-26",
   "go_version": "1.26",
   "goos": "linux",
   "goarch": "amd64",
@@ -13,37 +13,37 @@
           "allocs_op": 0,
           "b_op": 0,
           "framework": "Rivaas",
-          "ns_op": 64.29
+          "ns_op": 47.41
         },
         {
           "allocs_op": 0,
           "b_op": 0,
           "framework": "StdMux",
-          "ns_op": 88.79
+          "ns_op": 80.04
         },
         {
           "allocs_op": 0,
           "b_op": 0,
           "framework": "Gin",
-          "ns_op": 60.28
+          "ns_op": 61.1
         },
         {
           "allocs_op": 1,
           "b_op": 8,
           "framework": "Echo",
-          "ns_op": 86.12
+          "ns_op": 78.16
         },
         {
           "allocs_op": 2,
           "b_op": 368,
           "framework": "Chi",
-          "ns_op": 322.7
+          "ns_op": 347.6
         },
         {
           "allocs_op": 24,
           "b_op": 3448,
           "framework": "Hertz",
-          "ns_op": 1709
+          "ns_op": 1720
         }
       ]
     },
@@ -55,37 +55,37 @@
           "allocs_op": 0,
           "b_op": 0,
           "framework": "Rivaas",
-          "ns_op": 136.3
+          "ns_op": 82.16
         },
         {
           "allocs_op": 1,
           "b_op": 16,
           "framework": "StdMux",
-          "ns_op": 201.8
+          "ns_op": 212.2
         },
         {
           "allocs_op": 0,
           "b_op": 0,
           "framework": "Gin",
-          "ns_op": 97.43
+          "ns_op": 104.4
         },
         {
           "allocs_op": 2,
           "b_op": 16,
           "framework": "Echo",
-          "ns_op": 155.8
+          "ns_op": 149.6
         },
         {
           "allocs_op": 2,
           "b_op": 368,
           "framework": "Chi",
-          "ns_op": 418.4
+          "ns_op": 407.2
         },
         {
           "allocs_op": 27,
           "b_op": 3544,
           "framework": "Hertz",
-          "ns_op": 2082
+          "ns_op": 2035
         }
       ]
     }
