@@ -4,7 +4,7 @@
  * SCSS var              → hex (in _variables.scss)
  * --color-rivaas-night  → $rivaas-night #0D1E1A
  * --color-rivaas-dark   → $rivaas-dark #162823
- * --color-rivaas-surface → $rivaas-surface #22332F
+ * --color-rivaas-surface → $rivaas-surface #293D38
  * --color-rivaas-slate  → $rivaas-slate #2E3D39
  * --color-rivaas-graphite → $rivaas-graphite #44524F
  * --color-rivaas-basalt → $rivaas-basalt #3A4946
@@ -17,7 +17,7 @@
  * --color-rivaas-alpine-dark → $rivaas-alpine-dark #155A49
  * --color-rivaas-alpine-light → $rivaas-alpine-light #3FAF98
  * --color-rivaas-moss   → $rivaas-moss #2D8A55
- * --color-rivaas-glacier → $rivaas-glacier #2563EB
+ * --color-rivaas-glacier → $rivaas-glacier #0891B2
  * --color-rivaas-rust   → $rivaas-rust #D4553E
  */
 @import "tailwindcss";
@@ -25,7 +25,7 @@
 @theme {
   --color-rivaas-night: oklch(9% 0.025 158);
   --color-rivaas-dark: oklch(14% 0.022 158);
-  --color-rivaas-surface: oklch(20% 0.02 158);
+  --color-rivaas-surface: oklch(24% 0.022 158);  /* #293D38 — lightened for surface contrast */
   --color-rivaas-slate: oklch(26% 0.018 158);
   --color-rivaas-graphite: oklch(36% 0.015 158);
   --color-rivaas-basalt: oklch(32% 0.016 158);
@@ -38,7 +38,7 @@
   --color-rivaas-alpine-dark: oklch(36.5% 0.062 166);
   --color-rivaas-alpine-light: oklch(68.5% 0.11 166);
   --color-rivaas-moss: oklch(54.2% 0.13 149);
-  --color-rivaas-glacier: oklch(62.3% 0.214 259.815);
+  --color-rivaas-glacier: oklch(52% 0.13 223);  /* #0891B2 — glacier cyan, alpine-coherent */
   --color-rivaas-rust: oklch(54% 0.155 26);
 
   --font-display: Inter, system-ui, sans-serif;

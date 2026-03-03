@@ -30,7 +30,7 @@ $rivaas-alpine-light: #3FAF98; // docs: $dark-accent | TW: oklch(68.5% 0.11 166)
 // ========================================
 // Dark Mode Surface (for landing page)
 // ========================================
-$rivaas-surface: #22332F;      // docs: $dark-surface (clearer separation, ~20% lightness) | TW: oklch(20% 0.02 158)
+$rivaas-surface: #293D38;      // docs: $dark-surface (lightened for ~1.7:1 contrast on $dark-bg) | TW: oklch(24% 0.022 158)
 $rivaas-text: #E8EDEA;         // docs: $dark-text (tuned for new surfaces)
 $rivaas-text-muted: #9BA9A3;   // docs: $dark-text-muted
 
@@ -51,7 +51,7 @@ $rivaas-shadow-alpine: 0 4px 15px rgba($rivaas-alpine, 0.25);
 // Semantic Colors
 // ========================================
 $rivaas-moss: #2D8A55;         // docs: $success | TW: oklch(54.2% 0.13 149)
-$rivaas-glacier: #2563EB;      // docs: $info | TW: oklch(62.3% 0.214 259.815)
+$rivaas-glacier: #0891B2;      // docs: $info | TW: oklch(52% 0.13 223) — glacier cyan, alpine-coherent
 $rivaas-amber: #D97706;        // docs: $warning
 $rivaas-rust: #D4553E;         // docs: $danger (brightened for ~5:1 on dark backgrounds)
 
