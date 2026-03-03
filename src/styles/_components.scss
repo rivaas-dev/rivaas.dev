@@ -9,7 +9,7 @@
   box-shadow: 
     0 25px 50px -12px rgba($rivaas-dark, 0.3),
     0 0 0 1px rgba($rivaas-alpine, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    inset 0 1px 0 $rivaas-dark-border;
 }
 
 .terminal-header {
@@ -18,7 +18,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid $rivaas-dark-border;
 }
 
 .terminal-dot {
@@ -29,10 +29,41 @@
 
 .terminal-body {
   padding: 20px 24px;
+  margin: 0 8px 8px 8px;
   font-family: $font-mono;
   font-size: 14px;
   line-height: 1.2;
   white-space: pre-wrap;
+
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+
+  &:hover {
+    scrollbar-color: rgba($rivaas-alpine, 0.5) rgba($rivaas-alpine, 0.1);
+  }
+
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 3px;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: rgba($rivaas-alpine, 0.7);
+    }
+  }
+
+  &:hover::-webkit-scrollbar-thumb {
+    background: rgba($rivaas-alpine, 0.5);
+  }
 }
 
 .terminal-line {
@@ -77,6 +108,7 @@
 .asciinema-container {
   padding: 0;
   min-height: 200px;
+  overflow-x: auto;
 
   .asciinema-player-wrapper {
     border-radius: 0 0 12px 12px;
@@ -88,18 +120,31 @@
 }
 
 // Asciinema player: Rivaas theme (dark, alpine accents)
+// Slots 0-7: normal ANSI colors. Slots 8-15: bright variants (used for bold text).
+// Colors 2/4/5 use lighter variants for legibility on the dark terminal background.
 .asciinema-player-theme-rivaas {
   --term-color-foreground: #{$rivaas-text};
   --term-color-background: #{$rivaas-slate};
 
-  --term-color-0: #{$rivaas-dark};
-  --term-color-1: #{$rivaas-rust};
-  --term-color-2: #{$rivaas-moss};
-  --term-color-3: #{$rivaas-amber};
-  --term-color-4: #{$rivaas-glacier};
-  --term-color-5: #{$rivaas-alpine};
-  --term-color-6: #{$rivaas-alpine-light};
-  --term-color-7: #{$rivaas-text};
+  // Normal colors
+  --term-color-0: #{$rivaas-dark};          // black
+  --term-color-1: #{$rivaas-rust};          // red (errors)
+  --term-color-2: #{$rivaas-alpine-light};  // green (strings, success) — lighter for contrast
+  --term-color-3: #{$rivaas-amber};         // yellow (warnings, types)
+  --term-color-4: #7CB4F0;                  // blue (keywords) — desaturated light blue, palette-neutral
+  --term-color-5: #{$rivaas-alpine-light};  // magenta → reuse alpine-light (rarely used in Go output)
+  --term-color-6: #{$rivaas-fog};           // cyan (paths, special)
+  --term-color-7: #{$rivaas-silver};        // white (normal text)
+
+  // Bright variants (bold text, bright escape codes)
+  --term-color-8: #{$rivaas-basalt};        // bright black (comments, dim text)
+  --term-color-9: #F08080;                  // bright red — lightened rust
+  --term-color-10: #6ECFB8;                 // bright green — lighter alpine
+  --term-color-11: #F5C06A;                 // bright yellow — lighter amber
+  --term-color-12: #A8CFFF;                 // bright blue — lighter version of color-4
+  --term-color-13: #8ECFC0;                 // bright magenta — muted teal
+  --term-color-14: #{$rivaas-text};         // bright cyan → near-white for highlights
+  --term-color-15: #{$rivaas-white};        // bright white
 }
 
 // Comparison section: before/after tabs
@@ -111,9 +156,44 @@
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
+  position: relative;
 
   &::-webkit-scrollbar {
     display: none;
+  }
+
+  @media (max-width: 768px) {
+    justify-content: flex-start;
+    padding-bottom: 8px;
+    margin-bottom: calc(1.5rem - 8px);
+    scrollbar-width: thin;
+    scrollbar-color: rgba($rivaas-alpine, 0.5) transparent;
+
+    &::-webkit-scrollbar {
+      display: block;
+      height: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: rgba($rivaas-alpine, 0.1);
+      border-radius: 2px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba($rivaas-alpine, 0.5);
+      border-radius: 2px;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 8px;
+      width: 32px;
+      background: linear-gradient(to left, $rivaas-night, transparent);
+      pointer-events: none;
+    }
   }
 
   .comparison-tab {
@@ -141,30 +221,30 @@
 }
 
 .comparison-panels {
+  display: grid;
   position: relative;
 }
 
 .comparison-panel {
-  display: none;
-  animation: panelFadeIn 0.3s ease;
+  grid-area: 1 / 1;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(6px);
+  height: 0;
+  overflow: hidden;
+  transition:
+    opacity $transition-normal,
+    visibility $transition-normal,
+    transform $transition-normal;
 
   &.active {
-    display: block;
-  }
-
-  &[hidden] {
-    display: none !important;
-  }
-}
-
-@keyframes panelFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
     opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
     transform: translateY(0);
+    height: auto;
+    overflow: visible;
   }
 }
 
@@ -272,7 +352,31 @@
   }
 }
 
-// Navigation
+// Navigation — safe area for notched devices
+nav.fixed {
+  padding-top: env(safe-area-inset-top);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+@media (max-width: 767px) {
+  #mobile-menu-button {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.mobile-nav-link {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+
 .nav-link {
   position: relative;
   color: $rivaas-fog;
@@ -426,7 +530,7 @@
 // Benchmark components - Vertical Bar Chart
 .benchmark-scenarios-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
   gap: 3rem;
   margin-bottom: 2rem;
   
@@ -436,6 +540,9 @@
   }
 }
 
+.benchmark-scenario {
+  min-width: 0; // Allow grid item to shrink below content size
+}
 
 .benchmark-bars-container {
   display: flex;
@@ -447,13 +554,16 @@
   background: rgba($rivaas-basalt, 0.5);
   border-radius: 12px;
   border: 1px solid rgba($rivaas-alpine, 0.15);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .benchmark-bar-group {
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex: 1;
+  flex: 1 1 0;
+  min-width: 0;
   max-width: 80px;
   
   &.benchmark-highlight {
@@ -493,6 +603,8 @@
 .benchmark-bar-vertical {
   position: relative;
   width: 100%;
+  height: calc(var(--bar-height-ratio, 0) * 100%);
+  max-height: 100%;
   background: linear-gradient(180deg, $rivaas-moss 0%, $rivaas-alpine-dark 100%);
   border-radius: 8px 8px 0 0;
   transition: height 0.8s cubic-bezier(0.4, 0, 0.2, 1);

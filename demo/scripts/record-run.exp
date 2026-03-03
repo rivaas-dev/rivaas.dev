@@ -5,16 +5,24 @@
 set timeout 60
 set cast_path "../src/public/casts/run.cast"
 
-spawn asciinema rec --overwrite --cols 100 --rows 40 $cast_path
+proc human_type {text} {
+    foreach char [split $text ""] {
+        send -- $char
+        after [expr {80 + int(rand() * 100)}]
+    }
+}
+
+spawn asciinema rec --overwrite --cols 120 --rows 40 $cast_path
 
 sleep 1
-send "go run main.go"
+human_type "go run main.go"
 sleep 1
 send "\r"
 sleep 8
 send "\003"
 sleep 0.5
-send "exit\r"
+human_type "exit"
+send "\r"
 sleep 2
 send "\r"
 expect eof

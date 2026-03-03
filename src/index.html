@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rivaas - High-Performance API Framework for Go</title>
-    <meta name="description" content="Build production-ready APIs in Go with Rivaas, a high-performance framework. Built-in OpenTelemetry, automatic OpenAPI docs.">
-    <meta name="keywords" content="Go web framework, Golang HTTP router, high-performance API, Go microservices, OpenTelemetry Go, Go observability, REST API Go, Go HTTP framework, cloud-native Go, production-ready Go framework">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0D1E1A">
+    <meta name="color-scheme" content="dark">
+    <title>Rivaas — Go API Framework with Built-in Observability</title>
+    <meta name="description" content="Rivaas is a Go API framework that comes with OpenTelemetry, OpenAPI docs, and health probes already set up. Write your handlers — skip the boilerplate.">
+    <meta name="keywords" content="rivaas, Go API framework, Go web framework, Golang HTTP router, OpenTelemetry Go, OpenAPI Go, Go observability, Go binding, zero allocation router, Go structured logging, Go microservices, production-ready Go framework">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Rivaas Team">
     <link rel="canonical" href="https://rivaas.dev/">
@@ -17,20 +19,21 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="Rivaas - High-Performance API Framework for Go">
-    <meta property="og:description" content="Build production-ready APIs in Go with Rivaas, a high-performance framework. Built-in OpenTelemetry, automatic OpenAPI docs.">
+    <meta property="og:title" content="Rivaas — Go API Framework with Built-in Observability">
+    <meta property="og:description" content="Rivaas is a Go API framework that comes with OpenTelemetry, OpenAPI docs, and health probes already set up. Write your handlers — skip the boilerplate.">
     <meta property="og:image" content="https://rivaas.dev/images/logo-alpine.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:url" content="https://rivaas.dev">
+    <meta property="og:url" content="https://rivaas.dev/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Rivaas">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Rivaas - High-Performance API Framework for Go">
-    <meta name="twitter:description" content="Build production-ready APIs in Go with Rivaas, a high-performance framework. Built-in OpenTelemetry, automatic OpenAPI docs.">
+    <meta name="twitter:title" content="Rivaas — Go API Framework with Built-in Observability">
+    <meta name="twitter:description" content="Rivaas is a Go API framework that comes with OpenTelemetry, OpenAPI docs, and health probes already set up. Write your handlers — skip the boilerplate.">
     <meta name="twitter:image" content="https://rivaas.dev/images/logo-alpine.png">
+    <meta name="twitter:site" content="@rivaas_dev">
     
     <!-- Resource hints for external domains -->
     <link rel="preconnect" href="https://github.com" crossorigin>
@@ -39,8 +42,8 @@
     <!-- Noscript fallback for animated metrics (matches benchmarks.json Rivaas Static) -->
     <noscript>
         <style>
-            .metric-value[data-target="15324548"]::after { content: "15.3M+"; }
-            .metric-value[data-target="65"]::after { content: "65ns"; }
+            .metric-value[data-target="21097654"]::after { content: "21.1M+"; }
+            .metric-value[data-target="47"]::after { content: "47ns"; }
             .metric-value[data-target="0"]::after { content: "0B"; }
             .metric-value { font-size: 0; }
         </style>
@@ -55,7 +58,7 @@
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
       "name": "Rivaas",
-      "description": "A high-performance, modular API framework for Go with integrated observability",
+      "description": "A Go API framework with OpenTelemetry, OpenAPI docs, and health probes built in. Write your handlers — skip the boilerplate.",
       "applicationCategory": "DeveloperApplication",
       "operatingSystem": "Any",
       "programmingLanguage": "Go",
@@ -64,9 +67,10 @@
         "price": "0",
         "priceCurrency": "USD"
       },
-      "url": "https://rivaas.dev",
+      "url": "https://rivaas.dev/",
       "codeRepository": "https://github.com/rivaas-dev/rivaas",
-      "license": "https://www.apache.org/licenses/LICENSE-2.0"
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "sameAs": ["https://github.com/rivaas-dev/rivaas"]
     }
     </script>
 </head>
@@ -75,9 +79,6 @@
     <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-rivaas-alpine focus:text-white focus:px-4 focus:py-2 focus:rounded">
         Skip to content
     </a>
-    
-    <!-- Particles -->
-    <div class="particles" id="particles" aria-hidden="true"></div>
     
     <!-- ==============================
          Navigation
@@ -95,7 +96,7 @@
                     <a href="#packages" class="nav-link">Packages</a>
                     <a href="https://rivaas.dev/docs/" class="nav-link" target="_blank" rel="noopener noreferrer">Docs</a>
                     <a href="https://github.com/rivaas-dev/rivaas" class="nav-link" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    <a href="https://rivaas.dev/docs/getting-started" class="btn-primary text-sm" target="_blank" rel="noopener noreferrer">Get Started</a>
+                    <a href="https://rivaas.dev/docs/getting-started/" class="btn-primary text-sm" target="_blank" rel="noopener noreferrer">Get Started</a>
                 </div>
                 <!-- Mobile menu button -->
                 <button id="mobile-menu-button" class="md:hidden text-rivaas-silver hover:text-white transition-colors" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
@@ -112,7 +113,7 @@
                 <a href="#packages" class="nav-link mobile-nav-link">Packages</a>
                 <a href="https://rivaas.dev/docs/" class="nav-link mobile-nav-link" target="_blank" rel="noopener noreferrer">Docs</a>
                 <a href="https://github.com/rivaas-dev/rivaas" class="nav-link mobile-nav-link" target="_blank" rel="noopener noreferrer">GitHub</a>
-                <a href="https://rivaas.dev/docs/getting-started" class="btn-primary text-sm text-center" target="_blank" rel="noopener noreferrer">Get Started</a>
+                <a href="https://rivaas.dev/docs/getting-started/" class="btn-primary text-sm text-center" target="_blank" rel="noopener noreferrer">Get Started</a>
             </div>
         </div>
     </nav>
@@ -123,6 +124,7 @@
          Hero Section
          ============================== -->
     <section class="relative min-h-screen hero-bg flex items-center justify-center overflow-hidden">
+        <div class="particles" id="particles" aria-hidden="true"></div>
         <div class="persian-pattern"></div>
         <div class="mountains"></div>
         
@@ -130,33 +132,33 @@
             <div class="max-w-4xl mx-auto text-center">
                 <!-- Main headline -->
                 <h1 class="font-display text-5xl md:text-7xl font-light text-white mb-6 reveal" style="line-height: 1.1;">
-                    The <span class="font-semibold bg-gradient-to-r from-rivaas-alpine to-rivaas-alpine-light bg-clip-text text-transparent">high-performance</span>
-                    API framework for Go
+                    <span class="block">The <span class="font-semibold bg-gradient-to-r from-rivaas-alpine to-rivaas-alpine-light bg-clip-text text-transparent"><span id="hero-keyword-text">high-performance</span></span><span id="hero-cursor" aria-hidden="true">|</span></span>
+                    <span class="block">API framework for Go</span>
                 </h1>
                 
-                <p class="text-xl md:text-2xl text-rivaas-silver font-light mb-8 reveal" style="animation-delay: 0.1s;">
-                    Write your handlers. Everything else is already done.
+                <p id="hero-sub" class="text-xl md:text-2xl text-rivaas-silver font-light mb-8 reveal transition-opacity duration-500" style="animation-delay: 0.1s;">
+                    You write your request handlers. Rivaas takes care of the rest.
                 </p>
                 
-                <!-- Animated metrics (fallbacks match benchmarks.json Rivaas Static; JS overwrites from /benchmarks.json) -->
-                <div class="grid grid-cols-3 gap-8 max-w-2xl mx-auto mb-12 reveal" style="animation-delay: 0.2s;">
+                <!-- Animated metrics -->
+                <div id="hero-metrics" class="grid grid-cols-3 gap-4 sm:gap-8 max-w-2xl mx-auto mb-12 reveal" style="animation-delay: 0.2s;">
                     <div class="text-center">
-                        <div class="metric-value text-4xl md:text-5xl" data-target="15324548" data-suffix="+">0</div>
-                        <div class="text-rivaas-fog text-sm mt-2">req/sec</div>
+                        <div class="metric-value text-3xl sm:text-4xl md:text-5xl" data-target="21097654" data-suffix="+">0</div>
+                        <div class="text-rivaas-fog text-xs sm:text-sm mt-2">req/sec</div>
                     </div>
                     <div class="text-center">
-                        <div class="metric-value text-4xl md:text-5xl" data-target="65" data-suffix="ns">0</div>
-                        <div class="text-rivaas-fog text-sm mt-2">latency</div>
+                        <div class="metric-value text-3xl sm:text-4xl md:text-5xl" data-target="47" data-suffix="ns">0</div>
+                        <div class="text-rivaas-fog text-xs sm:text-sm mt-2">latency</div>
                     </div>
                     <div class="text-center">
-                        <div class="metric-value text-4xl md:text-5xl" data-target="0" data-suffix="B">0</div>
-                        <div class="text-rivaas-fog text-sm mt-2">per request</div>
+                        <div class="metric-value text-3xl sm:text-4xl md:text-5xl" data-target="0" data-suffix="B">0</div>
+                        <div class="text-rivaas-fog text-xs sm:text-sm mt-2">per request</div>
                     </div>
                 </div>
                 
                 <!-- CTA buttons -->
                 <div class="flex flex-col sm:flex-row gap-4 justify-center reveal" style="animation-delay: 0.3s;">
-                    <a href="https://rivaas.dev/docs/getting-started" class="btn-primary" target="_blank" rel="noopener noreferrer">
+                    <a href="https://rivaas.dev/docs/getting-started/" class="btn-primary" target="_blank" rel="noopener noreferrer">
                         Get Started →
                     </a>
                     <a href="https://github.com/rivaas-dev/rivaas" class="btn-secondary" target="_blank" rel="noopener noreferrer">
@@ -220,7 +222,7 @@
                     <a href="#features" class="anchor-link" aria-label="Link to What you get for free section">#</a>
                 </h2>
                 <p class="text-rivaas-silver text-center mb-10 reveal">
-                    Three lines replace thirty.
+                    Replace 30 lines of setup with just 3.
                 </p>
 
                 <div class="comparison-tabs reveal" role="tablist" aria-label="Comparison categories">
@@ -233,7 +235,7 @@
                 </div>
 
                 <div class="comparison-panels">
-                    <div class="comparison-panel active" data-panel="observability" role="tabpanel">
+                    <div class="comparison-panel active" data-panel="observability" role="tabpanel" aria-hidden="false">
                         <div class="comparison-grid">
                             <div class="comparison-side comparison-before">
                                 <div class="comparison-label">Others</div>
@@ -250,7 +252,7 @@
                         </div>
                         <p class="comparison-summary">Full OpenTelemetry stack — metrics, traces, and structured logs — configured in one block.</p>
                     </div>
-                    <div class="comparison-panel" data-panel="apidocs" role="tabpanel" hidden>
+                    <div class="comparison-panel" data-panel="apidocs" role="tabpanel" aria-hidden="true">
                         <div class="comparison-grid">
                             <div class="comparison-side comparison-before">
                                 <div class="comparison-label">Others</div>
@@ -267,7 +269,7 @@
                         </div>
                         <p class="comparison-summary">Route-level OpenAPI docs — no magic comments, no codegen step, full IDE support.</p>
                     </div>
-                    <div class="comparison-panel" data-panel="health" role="tabpanel" hidden>
+                    <div class="comparison-panel" data-panel="health" role="tabpanel" aria-hidden="true">
                         <div class="comparison-grid">
                             <div class="comparison-side comparison-before">
                                 <div class="comparison-label">Others</div>
@@ -284,7 +286,7 @@
                         </div>
                         <p class="comparison-summary">Kubernetes-ready liveness and readiness probes, plus SIGHUP config reload — built in.</p>
                     </div>
-                    <div class="comparison-panel" data-panel="binding" role="tabpanel" hidden>
+                    <div class="comparison-panel" data-panel="binding" role="tabpanel" aria-hidden="true">
                         <div class="comparison-grid">
                             <div class="comparison-side comparison-before">
                                 <div class="comparison-label">Others</div>
@@ -301,7 +303,7 @@
                         </div>
                         <p class="comparison-summary">One generic call binds path, query, headers, and body — then validates everything.</p>
                     </div>
-                    <div class="comparison-panel" data-panel="errors" role="tabpanel" hidden>
+                    <div class="comparison-panel" data-panel="errors" role="tabpanel" aria-hidden="true">
                         <div class="comparison-grid">
                             <div class="comparison-side comparison-before">
                                 <div class="comparison-label">Others</div>
@@ -318,7 +320,7 @@
                         </div>
                         <p class="comparison-summary">RFC 9457 problem details from a single option — every error gets consistent, spec-compliant formatting.</p>
                     </div>
-                    <div class="comparison-panel" data-panel="middleware" role="tabpanel" hidden>
+                    <div class="comparison-panel" data-panel="middleware" role="tabpanel" aria-hidden="true">
                         <div class="comparison-grid">
                             <div class="comparison-side comparison-before">
                                 <div class="comparison-label">Others</div>
@@ -333,7 +335,7 @@
                                 </div>
                             </div>
                         </div>
-                        <p class="comparison-summary">Production middleware — CORS, compression, rate limiting, recovery — each is a standalone module so you only pull in what you need, with functional options.</p>
+                        <p class="comparison-summary">Production-ready middleware: CORS, compression, rate limiting, and recovery. Each is a standalone module — use only what you need.</p>
                     </div>
                 </div>
             </div>
@@ -344,8 +346,8 @@
     <!-- ==============================
          Benchmarks Section
          ============================== -->
-    <section id="benchmarks" class="py-24 relative" aria-labelledby="benchmarks-heading">
-        <div class="container mx-auto px-6">
+    <section id="benchmarks" class="py-24 relative section-glow" aria-labelledby="benchmarks-heading">
+        <div class="container mx-auto px-4 md:px-6">
             <div class="max-w-5xl mx-auto">
                 <h2 id="benchmarks-heading" class="section-heading font-display text-3xl md:text-4xl font-semibold text-white text-center mb-2 reveal">
                     Proven Performance
@@ -354,14 +356,14 @@
                 <p class="text-rivaas-silver text-center mb-2 text-lg reveal">
                     Fast routing with zero allocations.
                 </p>
-                <p class="text-rivaas-fog text-center mb-12 max-w-2xl mx-auto text-sm reveal">
-                    Independent benchmarks comparing rivaas/router against popular Go frameworks. All values are nanoseconds per operation (ns/op)—lower is better.
+                <p class="text-rivaas-fog text-center mb-8 max-w-2xl mx-auto text-sm reveal">
+                    Independent benchmarks comparing <code class="text-rivaas-alpine-light font-mono">rivaas.dev/router</code> against popular Go frameworks. All values are nanoseconds per operation (ns/op)—lower is better.
                 </p>
-                
+
                 <div id="benchmark-charts" class="space-y-12 reveal" role="region" aria-label="Benchmark comparison charts">
                     <!-- Charts will be rendered here by JavaScript -->
                 </div>
-                
+
                 <div class="text-center mt-8 reveal">
                     <p class="text-sm text-rivaas-fog mb-2">
                         <span id="benchmark-meta">Loading benchmark data...</span>
@@ -371,6 +373,33 @@
                         <span aria-hidden="true">→</span>
                     </a>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==============================
+         Why not Gin/Echo/Fiber? (positioning)
+         ============================== -->
+    <section id="why-rivaas" class="py-16 relative section-glow">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="font-display text-3xl md:text-4xl font-semibold text-white mb-6 reveal">
+                    Why not Gin, Echo, or Fiber?
+                </h2>
+                <p class="text-rivaas-silver text-lg leading-relaxed mb-6 reveal">
+                    Gin, Echo, and Fiber are excellent HTTP routers — Rivaas's own router benchmarks alongside them.
+                    The difference is what you wire up <em>after</em> routing: OpenTelemetry, health probes, OpenAPI docs,
+                    structured error responses. That boilerplate usually takes a full sprint before you write any business logic.
+                </p>
+                <p class="text-rivaas-silver text-lg leading-relaxed reveal">
+                    Rivaas sets up that layer for you — but nothing is hidden. You can always see and change it. Every part is a standalone package with its own
+                    <code class="text-rivaas-alpine-light font-mono text-base">go.mod</code>. Use
+                    <code class="text-rivaas-alpine-light font-mono text-base">rivaas.dev/app</code> for the full stack, or drop in
+                    individual packages — <code class="text-rivaas-alpine-light font-mono text-base">rivaas.dev/router</code>,
+                    <code class="text-rivaas-alpine-light font-mono text-base">rivaas.dev/tracing</code>,
+                    <code class="text-rivaas-alpine-light font-mono text-base">rivaas.dev/binding</code> — alongside whatever you
+                    already have.
+                </p>
             </div>
         </div>
     </section>
@@ -386,7 +415,7 @@
                     <a href="#packages" class="anchor-link" aria-label="Link to Use what you need section">#</a>
                 </h2>
                 <p class="text-rivaas-silver text-center mb-8 reveal">
-                    Full framework or standalone packages. Same functional options, no lock-in.
+                    Use the full framework or individual packages. Same API, no lock-in.
                 </p>
 
                 <div class="terminal reveal mb-10">
@@ -396,7 +425,7 @@
                         <div class="terminal-dot bg-green-500"></div>
                         <span class="text-rivaas-fog text-sm ml-4 font-mono">standalone.go</span>
                     </div>
-                    <div class="terminal-body text-sm"><!-- SHIKI:mainConfig --></div>
+                    <div class="terminal-body text-sm overflow-x-auto"><!-- SHIKI:mainConfig --></div>
                 </div>
 
                 <div class="grid md:grid-cols-3 gap-4">
@@ -445,36 +474,58 @@
     <!-- ==============================
          Philosophy Section
          ============================== -->
-    <section class="py-24 relative">
+    <section id="philosophy" class="py-24 relative">
         <div class="container mx-auto px-6">
             <div class="max-w-3xl mx-auto text-center">
-                <div class="text-4xl mb-6 reveal">🌿</div>
+                <div class="flex justify-center mb-6 reveal">
+                    <svg class="w-10 h-10 text-rivaas-alpine-light" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 22V12M12 12C12 12 8 9 4 9c0 4 3 7 8 7"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8C12 8 16 5 20 5c0 4-3 7-8 7"/>
+                    </svg>
+                </div>
                 <h2 class="font-display text-3xl md:text-4xl font-semibold text-white mb-4 reveal">
                     Wild Rhubarb of the Mountains
                 </h2>
                 <p class="text-rivaas-silver text-lg leading-relaxed mb-8 reveal">
                     Named after a wild rhubarb plant that grows high in Iran's mountains, at 1,500–3,000 meters. 
                     It survives where little else can — yet has fed people for centuries.
+                    Like the plant, Rivaas is built to work hard and stay out of your way.
                 </p>
                 
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center reveal">
                     <div>
-                        <div class="text-rivaas-alpine-light text-2xl mb-2">🛡️</div>
+                        <div class="flex justify-center mb-2">
+                            <svg class="w-7 h-7 text-rivaas-alpine-light" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
+                            </svg>
+                        </div>
                         <div class="text-white font-medium">Resilient</div>
                         <div class="text-rivaas-fog text-xs mt-1">Production-ready</div>
                     </div>
                     <div>
-                        <div class="text-rivaas-alpine-light text-2xl mb-2">⚡</div>
+                        <div class="flex justify-center mb-2">
+                            <svg class="w-7 h-7 text-rivaas-alpine-light" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/>
+                            </svg>
+                        </div>
                         <div class="text-white font-medium">Lightweight</div>
                         <div class="text-rivaas-fog text-xs mt-1">Zero allocations</div>
                     </div>
                     <div>
-                        <div class="text-rivaas-alpine-light text-2xl mb-2">🔧</div>
+                        <div class="flex justify-center mb-2">
+                            <svg class="w-7 h-7 text-rivaas-alpine-light" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"/>
+                            </svg>
+                        </div>
                         <div class="text-white font-medium">Adaptive</div>
                         <div class="text-rivaas-fog text-xs mt-1">Local to cloud</div>
                     </div>
                     <div>
-                        <div class="text-rivaas-alpine-light text-2xl mb-2">📦</div>
+                        <div class="flex justify-center mb-2">
+                            <svg class="w-7 h-7 text-rivaas-alpine-light" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"/>
+                            </svg>
+                        </div>
                         <div class="text-white font-medium">Self-sufficient</div>
                         <div class="text-rivaas-fog text-xs mt-1">Integrated observability</div>
                     </div>
@@ -486,18 +537,18 @@
     <!-- ==============================
          CTA Section
          ============================== -->
-    <section class="py-24 relative">
+    <section id="get-started" class="py-24 relative">
         <div class="container mx-auto px-6">
             <div class="max-w-3xl mx-auto text-center reveal">
                 <h2 class="font-display text-3xl md:text-4xl font-semibold text-white mb-6">
                     Ready to build?
                 </h2>
-                <div class="bg-rivaas-basalt/50 rounded-xl p-6 mb-8 font-mono text-lg border border-rivaas-alpine/20">
-                    <span class="text-rivaas-fog">$</span> <span class="text-white">go get rivaas.dev/app</span>
+                <div class="bg-rivaas-basalt/50 rounded-xl p-4 sm:p-6 mb-8 font-mono text-base sm:text-lg border border-rivaas-alpine/20 overflow-x-auto">
+                    <span class="text-rivaas-fog">$</span> <span class="text-white whitespace-nowrap">go get rivaas.dev/app</span>
                 </div>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="https://rivaas.dev/docs/getting-started" class="btn-primary" target="_blank" rel="noopener noreferrer">
-                        Read the Docs →
+                    <a href="https://rivaas.dev/docs/getting-started/" class="btn-primary" target="_blank" rel="noopener noreferrer">
+                        Start with the Docs →
                     </a>
                     <a href="https://github.com/rivaas-dev/rivaas/tree/main/app/examples" class="btn-secondary" target="_blank" rel="noopener noreferrer">
                         View Examples
@@ -510,11 +561,15 @@
     <!-- ==============================
          Footer
          ============================== -->
-    <footer class="py-12 border-t border-white/5">
+    <footer class="pt-12 border-t border-white/5" style="padding-bottom: max(3rem, env(safe-area-inset-bottom))">
         <div class="container mx-auto px-6">
             <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-                <div class="text-rivaas-fog text-sm">
-                    Apache License 2.0 · Made with ❤️ for the Go community
+                <div class="text-rivaas-fog text-sm flex flex-wrap items-center justify-center md:justify-start gap-x-1.5 gap-y-1">
+                    <span>Apache License 2.0 · Made with</span>
+                    <svg class="w-4 h-4 text-rivaas-rust flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"/>
+                    </svg>
+                    <span>for the Go community</span>
                 </div>
                 <div class="flex items-center gap-8 text-sm">
                     <a href="https://github.com/rivaas-dev/rivaas" class="nav-link" target="_blank" rel="noopener noreferrer">GitHub</a>

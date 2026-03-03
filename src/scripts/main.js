@@ -20,6 +20,17 @@ function setupMobileMenu() {
             const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
             menuButton.setAttribute('aria-expanded', !isExpanded);
             mobileMenu.classList.toggle('hidden');
+            if (!isExpanded) {
+                mobileMenu.querySelector('a')?.focus();
+            }
+        });
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && menuButton.getAttribute('aria-expanded') === 'true') {
+                mobileMenu.classList.add('hidden');
+                menuButton.setAttribute('aria-expanded', 'false');
+                menuButton.focus();
+            }
         });
         
         // Close menu when clicking on links
@@ -33,11 +44,12 @@ function setupMobileMenu() {
     }
 }
 
-// Create floating particles
+// Create floating particles. Returns a destroy() function that removes all particles.
 function createParticles() {
     const container = document.getElementById('particles');
     const count = 30;
-    
+    const particles = [];
+
     for (let i = 0; i < count; i++) {
         const particle = document.createElement('div');
         particle.className = 'particle';
@@ -47,7 +59,10 @@ function createParticles() {
         particle.style.width = (Math.random() * 3 + 1) + 'px';
         particle.style.height = particle.style.width;
         container.appendChild(particle);
+        particles.push(particle);
     }
+
+    return () => particles.forEach((p) => p.remove());
 }
 
 // Animate metrics counter
@@ -84,6 +99,78 @@ function animateCounters() {
         
         requestAnimationFrame(update);
     });
+}
+
+// Hero typewriter slides: rotating keyword + sub-line
+const HERO_SLIDES = [
+    { keyword: 'high-performance', sub: 'Write your handlers. Everything else is already done.' },
+    { keyword: 'observable', sub: 'OpenTelemetry traces, Prometheus metrics, structured logs — zero config.' },
+    { keyword: 'OpenAPI-ready', sub: 'Your spec is generated live from your handlers, always in sync.' },
+];
+const HERO_READ_PAUSE_MS = 3400; // time to show each slide before transitioning
+const HERO_FADE_MS = 500;
+
+function setupHeroTypewriter() {
+    const keywordEl = document.getElementById('hero-keyword-text');
+    const cursorEl = document.getElementById('hero-cursor');
+    const subEl = document.getElementById('hero-sub');
+    if (!keywordEl || !cursorEl) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    let slideIndex = 0;
+    let transitionTimeout = null;
+
+    function typeKeyword(text, cb) {
+        cursorEl.classList.add('typing');
+        keywordEl.textContent = '';
+        let i = 0;
+        const t = setInterval(() => {
+            keywordEl.textContent = text.slice(0, i + 1);
+            i += 1;
+            if (i >= text.length) {
+                clearInterval(t);
+                cursorEl.classList.remove('typing');
+                cb();
+            }
+        }, 60);
+    }
+
+    function deleteKeyword(cb) {
+        cursorEl.classList.add('typing');
+        const t = setInterval(() => {
+            const s = keywordEl.textContent;
+            if (!s.length) {
+                clearInterval(t);
+                cursorEl.classList.remove('typing');
+                cb();
+            } else {
+                keywordEl.textContent = s.slice(0, -1);
+            }
+        }, 25);
+    }
+
+    function transition() {
+        transitionTimeout = setTimeout(() => {
+            transitionTimeout = null;
+            if (subEl) subEl.style.opacity = '0';
+
+            transitionTimeout = setTimeout(() => {
+                transitionTimeout = null;
+                deleteKeyword(() => {
+                    slideIndex = (slideIndex + 1) % HERO_SLIDES.length;
+                    const next = HERO_SLIDES[slideIndex];
+                    if (subEl) {
+                        subEl.textContent = next.sub;
+                        subEl.style.opacity = '1';
+                    }
+                    typeKeyword(next.keyword, transition);
+                });
+            }, HERO_FADE_MS);
+        }, HERO_READ_PAUSE_MS);
+    }
+
+    transition();
 }
 
 // Asciinema demo: autoplay on scroll, auto-advance between tabs
@@ -136,17 +223,22 @@ function setupAsciinemaDemo() {
             loop: false,
             speed: 1.5,
             idleTimeLimit: 3,
-            cols: 100,
+            cols: 120,
             rows,
             theme: 'auto/rivaas',
             poster: 'npt:0:01',
-            fit: 'width',
+            fit: false,
+            terminalFontSize: '14px',
             terminalLineHeight: 1.333,
         });
         currentCast = castName;
 
         currentPlayer.addEventListener('ended', () => {
-            setTimeout(advanceToNext, 800);
+            setTimeout(() => {
+                if (demoIsVisible) {
+                    advanceToNext();
+                }
+            }, 800);
         });
     }
 
@@ -160,16 +252,25 @@ function setupAsciinemaDemo() {
     });
 
     const demoSection = document.getElementById('demo');
+    let demoIsVisible = false;
+
     if (demoSection) {
-        const observer = new IntersectionObserver((entries) => {
+        const loadObserver = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     loadCast(currentCast);
-                    observer.unobserve(entry.target);
+                    loadObserver.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.2 });
-        observer.observe(demoSection);
+        loadObserver.observe(demoSection);
+
+        const visibilityObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                demoIsVisible = entry.isIntersecting;
+            });
+        }, { threshold: 0.1 });
+        visibilityObserver.observe(demoSection);
     } else {
         loadCast('write');
     }
@@ -194,12 +295,41 @@ function setupComparisonTabs() {
             panels.forEach((panel) => {
                 const isActive = panel.getAttribute('data-panel') === tabId;
                 panel.classList.toggle('active', isActive);
-                panel.hidden = !isActive;
+                panel.setAttribute('aria-hidden', !isActive);
             });
         });
     });
 
     injectLineCountBadges();
+    nudgeComparisonTabsOnMobile();
+}
+
+// Briefly scroll the comparison tabs container to hint at horizontal scrollability on mobile
+function nudgeComparisonTabsOnMobile() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!window.matchMedia('(max-width: 767px)').matches) return;
+
+    const tabsContainer = document.querySelector('.comparison-tabs');
+    if (!tabsContainer) return;
+
+    const featureSection = document.getElementById('features');
+    if (!featureSection) return;
+
+    const nudgeObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                nudgeObserver.unobserve(entry.target);
+                setTimeout(() => {
+                    tabsContainer.scrollTo({ left: 64, behavior: 'smooth' });
+                    setTimeout(() => {
+                        tabsContainer.scrollTo({ left: 0, behavior: 'smooth' });
+                    }, 600);
+                }, 600);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    nudgeObserver.observe(featureSection);
 }
 
 function injectLineCountBadges() {
@@ -212,13 +342,14 @@ function injectLineCountBadges() {
         const afterCode = sides[1].querySelector('.shiki code, .terminal-body');
         if (!beforeCode || !afterCode) return;
 
-        const countLines = (el) => {
-            const text = el.textContent.trim();
-            return text.split('\n').filter(line => line.trim().length > 0).length;
+        const getLineCount = (el) => {
+            const pre = el.closest('pre');
+            const n = pre?.dataset.lines ? parseInt(pre.dataset.lines, 10) : 0;
+            return Number.isNaN(n) ? 0 : n;
         };
 
-        const beforeLines = countLines(beforeCode);
-        const afterLines = countLines(afterCode);
+        const beforeLines = getLineCount(beforeCode);
+        const afterLines = getLineCount(afterCode);
         if (beforeLines <= 0 || afterLines <= 0) return;
 
         const label = sides[0].querySelector('.comparison-label');
@@ -296,14 +427,13 @@ async function renderBenchmarks(data) {
         if (metaElement) {
             metaElement.textContent = `Go ${data.go_version} • ${data.cpu} • Updated ${data.updated}`;
         }
-        
+
         // Create a container for both scenarios side by side
         const scenariosContainer = document.createElement('div');
         scenariosContainer.className = 'benchmark-scenarios-grid';
         
         // Calculate global max across all scenarios for consistent scaling
         const globalMax = Math.max(...data.scenarios.flatMap(s => s.results.map(r => r.ns_op)));
-        const BAR_MAX_HEIGHT = 240; // px - must match .benchmark-bar-wrapper height in CSS
         
         // Render each scenario as a vertical bar chart
         data.scenarios.forEach(scenario => {
@@ -349,9 +479,9 @@ async function renderBenchmarks(data) {
                 
                 const bar = document.createElement('div');
                 bar.className = 'benchmark-bar-vertical';
-                const heightPx = Math.max(4, Math.round((result.ns_op / globalMax) * BAR_MAX_HEIGHT));
-                bar.style.height = '0px'; // Start at 0 for animation
-                bar.dataset.height = heightPx;
+                const ratio = Math.max(0.02, result.ns_op / globalMax);
+                bar.style.setProperty('--bar-height-ratio', '0');
+                bar.dataset.ratio = ratio;
                 
                 barWrapper.appendChild(bar);
                 barGroup.appendChild(barWrapper);
@@ -390,7 +520,7 @@ async function renderBenchmarks(data) {
                     const bars = entry.target.querySelectorAll('.benchmark-bar-vertical');
                     bars.forEach((bar, index) => {
                         setTimeout(() => {
-                            bar.style.height = bar.dataset.height + 'px';
+                            bar.style.setProperty('--bar-height-ratio', bar.dataset.ratio);
                         }, index * 80);
                     });
                     chartsObserver.unobserve(entry.target);
@@ -414,8 +544,9 @@ async function renderBenchmarks(data) {
 // Initialize
 document.addEventListener('DOMContentLoaded', async () => {
     setupMobileMenu();
-    createParticles();
+    const destroyParticles = createParticles();
     setupReveal();
+    setupHeroTypewriter();
     setupComparisonTabs();
 
     let benchmarkData = null;

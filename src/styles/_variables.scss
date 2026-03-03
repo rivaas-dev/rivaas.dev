@@ -1,42 +1,57 @@
 // Rivaas Color Palette - Alpine Mountains
 // Synced with docs/_variables_project.scss
+// Tokens below that appear in tailwind.css @theme must be kept in sync (see tailwind.css comment block).
 
 // ========================================
 // Core Neutrals (synced with docs grays)
 // ========================================
-$rivaas-white: #F8FAF9;        // docs: $white
+$rivaas-white: #F8FAF9;        // docs: $white | TW: oklch(98.5% 0.003 155)
 $rivaas-cloud: #F5F7F6;        // docs: $gray-50
 $rivaas-frost: #F1F4F3;        // docs: $gray-100
-$rivaas-mist: #E4F0EC;         // docs: $gray-200
+$rivaas-mist: #E4F0EC;         // docs: $gray-200 | TW: oklch(94.2% 0.008 155)
 $rivaas-ash: #D6DEDA;          // docs: $gray-300
 $rivaas-pebble: #B5C2BC;       // docs: $gray-400
-$rivaas-silver: #BCC8C3;       // secondary text (~8:1 on night, ~4.5:1 on basalt)
-$rivaas-fog: #95A8A2;          // docs: $gray-500 (bumped for ~6.5:1 on night, ~3.5:1 on basalt)
-$rivaas-stone: #5C6B66;        // docs: $gray-600
-$rivaas-basalt: #354542;       // docs: $gray-700 (lifted for surface contrast, ~27% lightness)
-$rivaas-slate: #2A3532;        // docs: $gray-800 (lifted for terminal depth)
-$rivaas-dark: #1F2A27;         // docs: $gray-900
-$rivaas-night: #0F1413;        // docs: $black
+$rivaas-silver: #BCC8C3;       // secondary text (~8:1 on night, ~4.5:1 on basalt) | TW: oklch(80% 0.01 155)
+$rivaas-fog: #95A8A2;          // docs: $gray-500 (bumped for ~6.5:1 on night, ~3.5:1 on basalt) | TW: oklch(68% 0.012 155)
+$rivaas-stone: #5C6B66;        // docs: $gray-600 | TW: oklch(44.2% 0.015 155)
+$rivaas-graphite: #44524F;     // docs: $gray-650 (borders, dividers, ~36% lightness) | TW: oklch(36% 0.015 158)
+$rivaas-basalt: #3A4946;      // docs: $gray-700 (elevated surfaces, ~32% lightness) | TW: oklch(32% 0.016 158)
+$rivaas-slate: #2E3D39;        // docs: $gray-800 (terminal, cards, ~26% lightness) | TW: oklch(26% 0.018 158)
+$rivaas-dark: #162823;         // docs: $gray-900 (crisper chroma, hue 158) | TW: oklch(14% 0.022 158)
+$rivaas-night: #0D1E1A;        // docs: $black (deeper, crisper, hue 158) | TW: oklch(9% 0.025 158)
 
 // ========================================
 // Brand Colors (Alpine Green)
 // ========================================
-$rivaas-alpine: #1E6F5C;       // docs: $primary
-$rivaas-alpine-dark: #155A49;  // docs: $primary-dark
-$rivaas-alpine-light: #3FAF98; // docs: $dark-accent
+$rivaas-alpine: #1E6F5C;       // docs: $primary | TW: oklch(45.8% 0.065 166)
+$rivaas-alpine-dark: #155A49;  // docs: $primary-dark | TW: oklch(36.5% 0.062 166)
+$rivaas-alpine-light: #3FAF98; // docs: $dark-accent | TW: oklch(68.5% 0.11 166)
 
 // ========================================
 // Dark Mode Surface (for landing page)
 // ========================================
-$rivaas-surface: #1F2926;      // docs: $dark-surface (lifted for visible section separation)
-$rivaas-text: #E6ECE9;         // docs: $dark-text
-$rivaas-text-muted: #A3B1AB;   // docs: $dark-text-muted
+$rivaas-surface: #22332F;      // docs: $dark-surface (clearer separation, ~20% lightness) | TW: oklch(20% 0.02 158)
+$rivaas-text: #E8EDEA;         // docs: $dark-text (tuned for new surfaces)
+$rivaas-text-muted: #9BA9A3;   // docs: $dark-text-muted
+
+// Dark mode semantic tokens (stronger for clearer definition)
+$rivaas-dark-border: rgba($rivaas-white, 0.08);
+$rivaas-dark-divider: rgba($rivaas-alpine, 0.18);
+$rivaas-dark-overlay: rgba($rivaas-night, 0.5);
+
+// Focus ring (accessibility)
+$rivaas-focus-ring: 2px solid rgba($rivaas-alpine-light, 0.6);
+
+// Shadow tokens
+$rivaas-shadow-soft: 0 4px 12px rgba($rivaas-night, 0.4);
+$rivaas-shadow-elevated: 0 25px 50px -12px rgba($rivaas-night, 0.5);
+$rivaas-shadow-alpine: 0 4px 15px rgba($rivaas-alpine, 0.25);
 
 // ========================================
 // Semantic Colors
 // ========================================
-$rivaas-moss: #2D8A55;         // docs: $success
-$rivaas-glacier: #2563EB;      // docs: $info
+$rivaas-moss: #2D8A55;         // docs: $success | TW: oklch(54.2% 0.13 149)
+$rivaas-glacier: #2563EB;      // docs: $info | TW: oklch(62.3% 0.214 259.815)
 $rivaas-amber: #D97706;        // docs: $warning
 $rivaas-rust: #D4553E;         // docs: $danger (brightened for ~5:1 on dark backgrounds)
 

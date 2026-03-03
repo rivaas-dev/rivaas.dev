@@ -5,15 +5,23 @@
 set timeout 60
 set cast_path "../src/public/casts/write.cast"
 
-spawn asciinema rec --overwrite --cols 100 --rows 40 $cast_path
+proc human_type {text} {
+    foreach char [split $text ""] {
+        send -- $char
+        after [expr {80 + int(rand() * 100)}]
+    }
+}
+
+spawn asciinema rec --overwrite --cols 120 --rows 40 $cast_path
 
 # Wait for shell prompt
 sleep 1
-send "bat --style=plain --color=always --paging=never main.go"
+human_type "bat --style=plain --color=always --paging=never main.go"
 sleep 1
 send "\r"
-sleep 3
-send "exit\r"
+sleep 5
+human_type "exit"
+send "\r"
 sleep 2
 send "\r"
 expect eof

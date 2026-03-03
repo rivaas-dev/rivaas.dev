@@ -1,10 +1,34 @@
 /* stylelint-disable at-rule-no-unknown */
+/*
+ * Tailwind theme tokens — keep in sync with _variables.scss (hex source).
+ * SCSS var              → hex (in _variables.scss)
+ * --color-rivaas-night  → $rivaas-night #0D1E1A
+ * --color-rivaas-dark   → $rivaas-dark #162823
+ * --color-rivaas-surface → $rivaas-surface #22332F
+ * --color-rivaas-slate  → $rivaas-slate #2E3D39
+ * --color-rivaas-graphite → $rivaas-graphite #44524F
+ * --color-rivaas-basalt → $rivaas-basalt #3A4946
+ * --color-rivaas-stone  → $rivaas-stone #5C6B66
+ * --color-rivaas-fog    → $rivaas-fog #95A8A2
+ * --color-rivaas-silver → $rivaas-silver #BCC8C3
+ * --color-rivaas-mist   → $rivaas-mist #E4F0EC
+ * --color-rivaas-white  → $rivaas-white #F8FAF9
+ * --color-rivaas-alpine → $rivaas-alpine #1E6F5C
+ * --color-rivaas-alpine-dark → $rivaas-alpine-dark #155A49
+ * --color-rivaas-alpine-light → $rivaas-alpine-light #3FAF98
+ * --color-rivaas-moss   → $rivaas-moss #2D8A55
+ * --color-rivaas-glacier → $rivaas-glacier #2563EB
+ * --color-rivaas-rust   → $rivaas-rust #D4553E
+ */
 @import "tailwindcss";
 
 @theme {
-  --color-rivaas-night: oklch(8.3% 0.01 155);
-  --color-rivaas-dark: oklch(16.8% 0.012 155);
-  --color-rivaas-basalt: oklch(28.5% 0.013 155);
+  --color-rivaas-night: oklch(9% 0.025 158);
+  --color-rivaas-dark: oklch(14% 0.022 158);
+  --color-rivaas-surface: oklch(20% 0.02 158);
+  --color-rivaas-slate: oklch(26% 0.018 158);
+  --color-rivaas-graphite: oklch(36% 0.015 158);
+  --color-rivaas-basalt: oklch(32% 0.016 158);
   --color-rivaas-stone: oklch(44.2% 0.015 155);
   --color-rivaas-fog: oklch(68% 0.012 155);
   --color-rivaas-silver: oklch(80% 0.01 155);
@@ -15,6 +39,7 @@
   --color-rivaas-alpine-light: oklch(68.5% 0.11 166);
   --color-rivaas-moss: oklch(54.2% 0.13 149);
   --color-rivaas-glacier: oklch(62.3% 0.214 259.815);
+  --color-rivaas-rust: oklch(54% 0.155 26);
 
   --font-display: Inter, system-ui, sans-serif;
   --font-sans: Inter, system-ui, sans-serif;
