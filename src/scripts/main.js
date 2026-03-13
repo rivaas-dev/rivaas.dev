@@ -541,10 +541,14 @@ async function renderBenchmarks(data) {
     }
 }
 
-// Initialize
-document.addEventListener('DOMContentLoaded', async () => {
+// Initialize critical interactions quickly after DOM is available.
+document.addEventListener('DOMContentLoaded', () => {
     setupMobileMenu();
-    const destroyParticles = createParticles();
+});
+
+// Defer layout-heavy and visual work until all resources are loaded to reduce FOUC/layout warnings.
+window.addEventListener('load', async () => {
+    createParticles();
     setupReveal();
     setupHeroTypewriter();
     setupComparisonTabs();
