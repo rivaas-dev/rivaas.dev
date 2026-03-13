@@ -181,7 +181,5 @@ rivaas.dev/metrics v0.6.4 h1:te0VxO45kIEvdf3TTzVv9vpuIoxl2db7P/4ASqBkarY=
 rivaas.dev/metrics v0.6.4/go.mod h1:PjRmy2vvaouAVHDRSxWNBhIzlWsRN2Z5X0quLl0vTQo=
 rivaas.dev/middleware/recovery v0.2.0 h1:gAj1rQocRdi+hhUGnuA7XRvQSJAelIAJS0lcRyrZea4=
 rivaas.dev/middleware/recovery v0.2.0/go.mod h1:LuC/V4LXakgk0vHPW0zT78EORcVtwg1xV/UTTekfDOo=
-rivaas.dev/router v0.12.0 h1:v4Lorh5ZkDzYFf/Sl7voXkfLG1+8AF+6828nJ+aLvp8=
-rivaas.dev/router v0.12.0/go.mod h1:eeUQAX9/sXy4R5rZv9AulklVR+/IxHi/XgnsKBlO6pk=
 rivaas.dev/validation v0.5.4 h1:OQTx5Zkgxrh8TOnRsbtOF1xnp+SY7zH4u5Jg5p1rs/8=
 rivaas.dev/validation v0.5.4/go.mod h1:15NOv3mZAw6Hp5bdA0RYrhSrqZmxQo5XxFpatSxktEs=

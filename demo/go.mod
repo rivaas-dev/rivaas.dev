@@ -14,6 +14,7 @@ replace (
 	rivaas.dev/app => ../../rivaas/app
 	rivaas.dev/logging => ../../rivaas/logging
 	rivaas.dev/openapi => ../../rivaas/openapi
+	rivaas.dev/router => ../../rivaas/router
 	rivaas.dev/tracing => ../../rivaas/tracing
 )
 
