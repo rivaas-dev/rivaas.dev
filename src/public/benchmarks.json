@@ -1,5 +1,5 @@
 {
-  "updated": "2026-03-12",
+  "updated": "2026-03-13",
   "go_version": "1.26",
   "goos": "linux",
   "goarch": "amd64",
@@ -13,37 +13,37 @@
           "allocs_op": 0,
           "b_op": 0,
           "framework": "Rivaas",
-          "ns_op": 47.79
+          "ns_op": 47.9
         },
         {
           "allocs_op": 0,
           "b_op": 0,
           "framework": "StdMux",
-          "ns_op": 76.73
+          "ns_op": 76.08
         },
         {
           "allocs_op": 0,
           "b_op": 0,
           "framework": "Gin",
-          "ns_op": 59.86
+          "ns_op": 61.01
         },
         {
           "allocs_op": 1,
           "b_op": 8,
           "framework": "Echo",
-          "ns_op": 79.26
+          "ns_op": 87.23
         },
         {
           "allocs_op": 2,
           "b_op": 368,
           "framework": "Chi",
-          "ns_op": 314.5
+          "ns_op": 314.2
         },
         {
           "allocs_op": 24,
           "b_op": 3448,
           "framework": "Hertz",
-          "ns_op": 1658
+          "ns_op": 1710
         }
       ]
     },
@@ -55,37 +55,37 @@
           "allocs_op": 0,
           "b_op": 0,
           "framework": "Rivaas",
-          "ns_op": 80.3
+          "ns_op": 81.1
         },
         {
           "allocs_op": 1,
           "b_op": 16,
           "framework": "StdMux",
-          "ns_op": 200.2
+          "ns_op": 203
         },
         {
           "allocs_op": 0,
           "b_op": 0,
           "framework": "Gin",
-          "ns_op": 97.26
+          "ns_op": 101.1
         },
         {
           "allocs_op": 2,
           "b_op": 16,
           "framework": "Echo",
-          "ns_op": 158
+          "ns_op": 162.3
         },
         {
           "allocs_op": 2,
           "b_op": 368,
           "framework": "Chi",
-          "ns_op": 393.5
+          "ns_op": 392.9
         },
         {
           "allocs_op": 27,
           "b_op": 3544,
           "framework": "Hertz",
-          "ns_op": 1946
+          "ns_op": 1950
         }
       ]
     }
