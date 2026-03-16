@@ -1,5 +1,5 @@
 {
-  "updated": "2026-03-14",
+  "updated": "2026-03-16",
   "go_version": "1.26",
   "goos": "linux",
   "goarch": "amd64",
@@ -13,37 +13,37 @@
           "allocs_op": 0,
           "b_op": 0,
           "framework": "Rivaas",
-          "ns_op": 48.36
+          "ns_op": 48.05
         },
         {
           "allocs_op": 0,
           "b_op": 0,
           "framework": "StdMux",
-          "ns_op": 76.21
+          "ns_op": 76.76
         },
         {
           "allocs_op": 0,
           "b_op": 0,
           "framework": "Gin",
-          "ns_op": 61.13
+          "ns_op": 61.19
         },
         {
           "allocs_op": 1,
           "b_op": 8,
           "framework": "Echo",
-          "ns_op": 83.98
+          "ns_op": 79.68
         },
         {
           "allocs_op": 2,
           "b_op": 368,
           "framework": "Chi",
-          "ns_op": 312.6
+          "ns_op": 312.2
         },
         {
           "allocs_op": 24,
           "b_op": 3448,
           "framework": "Hertz",
-          "ns_op": 1650
+          "ns_op": 1720
         }
       ]
     },
@@ -55,37 +55,37 @@
           "allocs_op": 0,
           "b_op": 0,
           "framework": "Rivaas",
-          "ns_op": 82.43
+          "ns_op": 82.45
         },
         {
           "allocs_op": 1,
           "b_op": 16,
           "framework": "StdMux",
-          "ns_op": 202.9
+          "ns_op": 199.6
         },
         {
           "allocs_op": 0,
           "b_op": 0,
           "framework": "Gin",
-          "ns_op": 123.4
+          "ns_op": 110.2
         },
         {
           "allocs_op": 2,
           "b_op": 16,
           "framework": "Echo",
-          "ns_op": 159
+          "ns_op": 152.3
         },
         {
           "allocs_op": 2,
           "b_op": 368,
           "framework": "Chi",
-          "ns_op": 452.3
+          "ns_op": 445.2
         },
         {
           "allocs_op": 27,
           "b_op": 3544,
           "framework": "Hertz",
-          "ns_op": 1932
+          "ns_op": 2019
         }
       ]
     }
