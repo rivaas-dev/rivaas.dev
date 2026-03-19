@@ -1,5 +1,5 @@
 {
-  "updated": "2026-03-16",
+  "updated": "2026-03-19",
   "go_version": "1.26",
   "goos": "linux",
   "goarch": "amd64",
@@ -13,37 +13,37 @@
           "allocs_op": 0,
           "b_op": 0,
           "framework": "Rivaas",
-          "ns_op": 48.05
+          "ns_op": 49.78
         },
         {
           "allocs_op": 0,
           "b_op": 0,
           "framework": "StdMux",
-          "ns_op": 76.76
+          "ns_op": 76.73
         },
         {
           "allocs_op": 0,
           "b_op": 0,
           "framework": "Gin",
-          "ns_op": 61.19
+          "ns_op": 60.87
         },
         {
           "allocs_op": 1,
           "b_op": 8,
           "framework": "Echo",
-          "ns_op": 79.68
+          "ns_op": 81.52
         },
         {
           "allocs_op": 2,
           "b_op": 368,
           "framework": "Chi",
-          "ns_op": 312.2
+          "ns_op": 314.8
         },
         {
           "allocs_op": 24,
           "b_op": 3448,
           "framework": "Hertz",
-          "ns_op": 1720
+          "ns_op": 1829
         }
       ]
     },
@@ -55,37 +55,37 @@
           "allocs_op": 0,
           "b_op": 0,
           "framework": "Rivaas",
-          "ns_op": 82.45
+          "ns_op": 83.86
         },
         {
           "allocs_op": 1,
           "b_op": 16,
           "framework": "StdMux",
-          "ns_op": 199.6
+          "ns_op": 198.2
         },
         {
           "allocs_op": 0,
           "b_op": 0,
           "framework": "Gin",
-          "ns_op": 110.2
+          "ns_op": 128.5
         },
         {
           "allocs_op": 2,
           "b_op": 16,
           "framework": "Echo",
-          "ns_op": 152.3
+          "ns_op": 155.9
         },
         {
           "allocs_op": 2,
           "b_op": 368,
           "framework": "Chi",
-          "ns_op": 445.2
+          "ns_op": 461.4
         },
         {
           "allocs_op": 27,
           "b_op": 3544,
           "framework": "Hertz",
-          "ns_op": 2019
+          "ns_op": 2093
         }
       ]
     }
